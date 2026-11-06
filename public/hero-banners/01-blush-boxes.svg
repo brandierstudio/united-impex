@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 650" width="1500" height="650" role="img" aria-label="United Impex hero slide 1: Packaging that feels like a gift.">
+ <defs><linearGradient id="surface" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F9E6EC"/><stop offset="1" stop-color="#F7D5E2"/></linearGradient><clipPath id="canvas"><rect width="1500" height="650" rx="40"/></clipPath></defs>
+ <defs>
+<filter id="shadow" x="-60%" y="-60%" width="240%" height="240%"><feGaussianBlur stdDeviation="17"/></filter>
+<filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="20" stdDeviation="19" flood-color="#57404D" flood-opacity=".15"/></filter>
+<linearGradient id="face" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#E6DCE0"/></linearGradient>
+</defs>
+ <g clip-path="url(#canvas)"><path d="M38 0 H1500 V108 C1462 112 1446 139 1446 183 C1446 220 1455 248 1477 263 C1492 273 1500 280 1500 291 V650 H38 Q0 650 0 612 V38 Q0 0 38 0Z" fill="url(#surface)"/>
+ <circle cx="1110" cy="305" r="280" fill="white" opacity=".24"/><circle cx="1150" cy="308" r="218" fill="none" stroke="white" stroke-width="2" opacity=".55"/>
+ <path d="M750 0 L970 0 L840 650 L660 650Z" fill="white" opacity=".08"/>
+ <rect x="83" y="88" width="10" height="10" rx="5" fill="#E91765"/><text x="111" y="98" font-family="Arial,Helvetica,sans-serif" font-size="18" letter-spacing="3.4" font-weight="700" fill="#252027">THE ART OF PRESENTATION</text>
+ <text x="80" y="211" font-family="Arial,Helvetica,sans-serif" font-size="72" font-weight="800" letter-spacing="-3.3" fill="#252027">Packaging that</text>
+ <text x="80" y="292" font-family="Arial,Helvetica,sans-serif" font-size="72" font-weight="800" letter-spacing="-3.3" fill="#E91765">feels like a gift.</text>
+ <text x="84" y="355" font-family="Arial,Helvetica,sans-serif" font-size="22" fill="#252027" opacity=".72">Signature boxes, refined finishes and thoughtful details.</text>
+ <rect x="80" y="415" width="263" height="66" rx="33" fill="#E91765"/><text x="116" y="455" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="700" fill="white">Explore Collection</text><path d="M306 447 h13 m-6 -6 l6 6 -6 6" fill="none" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+ <text x="84" y="566" font-family="Arial,Helvetica,sans-serif" font-size="15" letter-spacing="1.5" fill="#252027" opacity=".56">UNITED IMPEX  /  CUSTOM PRINT &amp; PACKAGING</text>
+ <ellipse cx="1080" cy="564" rx="214" ry="24" fill="#53414B" opacity=".13" filter="url(#shadow)"/>
+ <g filter="url(#soft)"><path d="M874 392 L1056 349 L1197 416 L1014 467 Z" fill="#FDFBFA" stroke="#E3C9D2" stroke-width="2"/><path d="M874 392 L1014 467 L1014 550 L874 476 Z" fill="#E8C8D4"/><path d="M1014 467 L1197 416 L1197 505 L1014 550 Z" fill="url(#face)"/><path d="M902 402 L1058 366 L1163 415 L1012 452 Z" fill="#FFFDFE"/><path d="M1012 453 L1012 549" stroke="#E91765" stroke-width="7"/><path d="M1009 399 L1028 410 L1027 458 L1007 447 Z" fill="#E91765" opacity=".82"/></g>
+ <g filter="url(#soft)"><path d="M1094 290 L1204 263 L1293 303 L1174 331 Z" fill="#FFFFFF"/><path d="M1094 290 L1174 331 L1174 402 L1094 361 Z" fill="#E6CFD8"/><path d="M1174 331 L1293 303 L1293 373 L1174 402 Z" fill="#FFF8FB"/><path d="M1174 331 L1174 401" stroke="#E91765" stroke-width="5"/><circle cx="1238" cy="344" r="13" fill="#E91765" opacity=".92"/></g>
+ <g transform="translate(838 275) rotate(-12)"><rect x="0" y="0" width="150" height="56" rx="4" fill="#E6B8C8"/><rect x="0" y="0" width="150" height="9" fill="#E91765" opacity=".65"/><path d="M20 38 H121" stroke="white" stroke-width="2" opacity=".7"/></g>
+ <circle cx="1368" cy="82" r="16" fill="#E91765" opacity=".42"/><circle cx="1300" cy="143" r="7" fill="#E91765" opacity=".55"/>
+ </g></svg>

@@ -1,0 +1,366 @@
+@import "tailwindcss";
+
+@theme {
+  --color-charcoal: #121216;
+  --color-canvas: #FFFFFF;
+  --color-brand-magenta: #EB1767;
+  --color-brand-magenta-dark: #C90E54;
+  --color-brand-pink-subtle: #FDF2F6;
+  --color-brand-magenta-tint: #FDF2F6;
+  --color-announcement-bg: #121216;
+  --color-text-primary: #121216;
+  --color-text-secondary: #52525B;
+  --color-text-muted: #71717A;
+  --color-surface-card: #FAFAFA;
+  --color-surface-muted: #F4F4F5;
+  --color-border-subtle: #E4E4E7;
+  --color-border-card: #F4F4F5;
+
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+:root {
+  --color-charcoal: #121216;
+  --color-canvas: #FFFFFF;
+  --color-brand-magenta: #EB1767;
+  --color-brand-magenta-dark: #C90E54;
+  --color-brand-pink-subtle: #FDF2F6;
+  --color-brand-magenta-tint: #FDF2F6;
+  --color-announcement-bg: #121216;
+  --color-text-primary: #121216;
+  --color-text-secondary: #52525B;
+  --color-text-muted: #71717A;
+  --color-surface-card: #FAFAFA;
+  --color-surface-muted: #F4F4F5;
+  --color-border-subtle: #E4E4E7;
+  --color-border-card: #F4F4F5;
+
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-canvas);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* =========================================================================
+   APPLE-INSPIRED LIQUID GLASS UTILITY CLASSES
+   Principles: Translucency, edge specular highlight, soft depth, fallbacks
+   ========================================================================= */
+
+/* Light Liquid Glass Surface */
+.glass-surface {
+  background-color: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+}
+
+/* Dark Liquid Glass Surface */
+.glass-surface-dark {
+  background-color: rgba(18, 18, 22, 0.90);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.38), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+}
+
+/* Floating Glass Control (Buttons, Dropdowns, Carousel Navs) */
+.glass-control {
+  background-color: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.95);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-control:hover {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08), inset 0 1px 1px rgba(255, 255, 255, 1);
+}
+
+/* Reduced Transparency Fallbacks (Accessibility & Older Browsers) */
+@media (prefers-reduced-transparency: reduce) {
+  .glass-surface {
+    background-color: #FFFFFF !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .glass-surface-dark {
+    background-color: #121216 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .glass-control {
+    background-color: #FFFFFF !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .glass-surface {
+    background-color: #FFFFFF !important;
+  }
+  .glass-surface-dark {
+    background-color: #121216 !important;
+  }
+  .glass-control {
+    background-color: #FFFFFF !important;
+  }
+}
+
+/* =========================================================================
+   STANDARDIZED UNIFIED BUTTON SYSTEM
+   ========================================================================= */
+
+/* Primary Button: Solid Brand Magenta */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  background-color: #EB1767;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.01em;
+  box-shadow: 0 4px 14px rgba(235, 23, 103, 0.25);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  min-height: 44px;
+  user-select: none;
+}
+
+.btn-primary:hover {
+  background-color: #C90E54;
+  box-shadow: 0 6px 20px rgba(235, 23, 103, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #EB1767;
+}
+
+/* Secondary Button: White/Neutral Surface with Subtle Border */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  background-color: #FFFFFF;
+  color: #121216;
+  border: 1px solid #E4E4E7;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  text-decoration: none;
+  min-height: 44px;
+  user-select: none;
+}
+
+.btn-secondary:hover {
+  background-color: #F4F4F5;
+  border-color: #D4D4D8;
+  color: #121216;
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #EB1767;
+}
+
+/* Dark Button: Charcoal Surface */
+.btn-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  background-color: #121216;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.01em;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  text-decoration: none;
+  min-height: 44px;
+  user-select: none;
+}
+
+.btn-dark:hover {
+  background-color: #27272A;
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.btn-dark:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-dark:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #121216, 0 0 0 4px #EB1767;
+}
+
+/* Glass Button: Floating Action */
+.btn-glass {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  color: #121216;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.95);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  text-decoration: none;
+  min-height: 44px;
+  user-select: none;
+}
+
+.btn-glass:hover {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-color: #FFFFFF;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.btn-glass:active {
+  transform: scale(0.98);
+}
+
+.btn-glass:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #EB1767;
+}
+
+/* Icon Button: Standard Touch Target */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid #E4E4E7;
+  color: #121216;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: all 0.15s ease-out;
+  cursor: pointer;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.btn-icon:hover {
+  background-color: #FFFFFF;
+  border-color: #D4D4D8;
+  color: #EB1767;
+}
+
+.btn-icon:active {
+  transform: scale(0.95);
+}
+
+.btn-icon:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #EB1767;
+}
+
+/* =========================================================================
+   ANIMATED PRODUCT MARQUEE
+   ========================================================================= */
+@keyframes marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 38s linear infinite;
+  will-change: transform;
+}
+
+.marquee-container:hover .animate-marquee-track,
+.marquee-container:focus-within .animate-marquee-track {
+  animation-play-state: paused;
+}
+
+.mask-marquee-edges {
+  mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+}
+
+@media (max-width: 640px) {
+  .mask-marquee-edges {
+    mask-image: linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+}

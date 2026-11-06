@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 650" width="1500" height="650" role="img" aria-label="United Impex hero slide 3: Make every detail feel considered.">
+ <defs><linearGradient id="surface" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#E9EEF0"/><stop offset="1" stop-color="#D6E2E5"/></linearGradient><clipPath id="canvas"><rect width="1500" height="650" rx="40"/></clipPath></defs>
+ <defs>
+<filter id="shadow" x="-60%" y="-60%" width="240%" height="240%"><feGaussianBlur stdDeviation="17"/></filter>
+<filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="20" stdDeviation="19" flood-color="#57404D" flood-opacity=".15"/></filter>
+<linearGradient id="grey" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#A6B7B9"/></linearGradient>
+</defs>
+ <g clip-path="url(#canvas)"><path d="M38 0 H1500 V108 C1462 112 1446 139 1446 183 C1446 220 1455 248 1477 263 C1492 273 1500 280 1500 291 V650 H38 Q0 650 0 612 V38 Q0 0 38 0Z" fill="url(#surface)"/>
+ <circle cx="1110" cy="305" r="280" fill="white" opacity=".24"/><circle cx="1150" cy="308" r="218" fill="none" stroke="white" stroke-width="2" opacity=".55"/>
+ <path d="M750 0 L970 0 L840 650 L660 650Z" fill="white" opacity=".08"/>
+ <rect x="83" y="88" width="10" height="10" rx="5" fill="#4F7C83"/><text x="111" y="98" font-family="Arial,Helvetica,sans-serif" font-size="18" letter-spacing="3.4" font-weight="700" fill="#222C31">DETAILS THAT STAY</text>
+ <text x="80" y="211" font-family="Arial,Helvetica,sans-serif" font-size="72" font-weight="800" letter-spacing="-3.3" fill="#222C31">Make every detail</text>
+ <text x="80" y="292" font-family="Arial,Helvetica,sans-serif" font-size="72" font-weight="800" letter-spacing="-3.3" fill="#4F7C83">feel considered.</text>
+ <text x="84" y="355" font-family="Arial,Helvetica,sans-serif" font-size="22" fill="#222C31" opacity=".72">Corporate notebooks and print that leave an impression.</text>
+ <rect x="80" y="415" width="263" height="66" rx="33" fill="#4F7C83"/><text x="116" y="455" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="700" fill="white">Explore Collection</text><path d="M306 447 h13 m-6 -6 l6 6 -6 6" fill="none" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+ <text x="84" y="566" font-family="Arial,Helvetica,sans-serif" font-size="15" letter-spacing="1.5" fill="#222C31" opacity=".56">UNITED IMPEX  /  CUSTOM PRINT &amp; PACKAGING</text>
+ <ellipse cx="1090" cy="564" rx="204" ry="26" fill="#31474A" opacity=".14" filter="url(#shadow)"/>
+ <g filter="url(#soft)" transform="translate(900 275) rotate(-13 180 143)"><rect x="20" y="20" width="250" height="302" rx="14" fill="#758F95"/><rect x="8" y="8" width="250" height="302" rx="14" fill="url(#grey)" stroke="#D9E3E6" stroke-width="3"/><rect x="8" y="8" width="26" height="302" rx="6" fill="#BBCBD0"/><path d="M88 116 H203" stroke="#4F7C83" stroke-width="5"/><path d="M102 134 H189" stroke="#7D989D" stroke-width="2"/><circle cx="145" cy="83" r="24" stroke="#4F7C83" fill="none" stroke-width="4"/><path d="M140 83 H150 M145 78 V88" stroke="#4F7C83" stroke-width="3"/></g>
+ <g filter="url(#soft)" transform="translate(1110 318) rotate(13)"><rect width="138" height="208" rx="9" fill="#F4F3F1" stroke="#A3B6BC" stroke-width="3"/><path d="M24 38 H115 M24 51 H93" stroke="#4F7C83" stroke-width="3"/><path d="M17 0 V208" stroke="#B8CACD" stroke-width="9"/></g>
+ <path d="M878 539 L1054 510" stroke="#4F7C83" stroke-width="7" stroke-linecap="round" opacity=".5"/>
+ <circle cx="1368" cy="82" r="16" fill="#4F7C83" opacity=".42"/><circle cx="1300" cy="143" r="7" fill="#4F7C83" opacity=".55"/>
+ </g></svg>
