@@ -23,7 +23,7 @@ export const ProductMarquee: React.FC = () => {
     <section 
       id="packaging-showcase" 
       aria-labelledby="marquee-section-heading"
-      className="w-full bg-white py-8 sm:py-10 lg:py-12 border-b border-zinc-100 overflow-hidden"
+      className="hidden md:block w-full bg-white py-8 sm:py-10 lg:py-12 border-b border-zinc-100 overflow-hidden"
     >
       {/* Editorial Section Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 sm:mb-8 text-center">

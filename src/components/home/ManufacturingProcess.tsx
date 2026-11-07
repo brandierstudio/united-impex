@@ -80,13 +80,13 @@ export const ManufacturingProcess: React.FC<ManufacturingProcessProps> = ({ onOp
           </p>
         </div>
 
-        {/* 12-Column Grid: Left 4 cols for Cup Anchor 3, Right 8 cols for 3-Step Flow */}
+        {/* 12-Column Grid: Left 4 cols for Cup Anchor 3 on Desktop, Right 8 cols for 3-Step Flow */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           
-          {/* CUP ANCHOR 3: LEFT SIDEWAY POINT */}
+          {/* CUP ANCHOR 3: LEFT SIDEWAY POINT (Preserved on Desktop for Cup Waypoint) */}
           <div 
             id="cup-anchor-3"
-            className="lg:col-span-4 rounded-2xl bg-zinc-900/90 border border-zinc-800 p-5 sm:p-6 flex flex-col justify-between shadow-md min-h-[220px] lg:min-h-[360px]"
+            className="hidden lg:flex lg:col-span-4 rounded-2xl bg-zinc-900/90 border border-zinc-800 p-5 sm:p-6 flex-col justify-between shadow-md min-h-[360px]"
           >
             <div>
               <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#EB1767] block mb-1">
@@ -116,8 +116,8 @@ export const ManufacturingProcess: React.FC<ManufacturingProcessProps> = ({ onOp
             </div>
           </div>
 
-          {/* RIGHT 8 COLS: 3 CONCISE PROCESS STEPS */}
-          <div className="lg:col-span-8 flex flex-col justify-between gap-4">
+          {/* RIGHT 8 COLS: 3 CONCISE PROCESS STEPS (Full-width on Mobile) */}
+          <div className="col-span-12 lg:col-span-8 flex flex-col justify-between gap-4">
             
             <div className="reveal-stagger-group grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
               {PROCESS_STAGES.map((stage: ProcessStage) => {

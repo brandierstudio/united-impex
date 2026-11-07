@@ -19,6 +19,10 @@ export interface HeroPhotoSlideData {
   headlineHighlight: string;
   subheadline: string;
   tagline: string;
+  mobileHeadlineMain: string;
+  mobileHeadlineHighlight: string;
+  mobileSubheadline: string;
+  mobileCtaLabel: string;
 }
 
 export const HERO_PHOTO_SLIDES: HeroPhotoSlideData[] = [
@@ -36,6 +40,10 @@ export const HERO_PHOTO_SLIDES: HeroPhotoSlideData[] = [
     headlineHighlight: 'feels like a gift.',
     subheadline: 'Signature rigid boxes, folding product cartons, and thoughtful custom finishes.',
     tagline: 'UNITED IMPEX / LUXURY CARTONS',
+    mobileHeadlineMain: 'Packaging That',
+    mobileHeadlineHighlight: 'Stands Apart.',
+    mobileSubheadline: 'Distinctive packaging for brands that value presentation.',
+    mobileCtaLabel: 'Explore Boxes',
   },
   {
     id: 'real-bags',
@@ -51,6 +59,10 @@ export const HERO_PHOTO_SLIDES: HeroPhotoSlideData[] = [
     headlineHighlight: 'Made to remember.',
     subheadline: 'Everyday kraft shopping bags and retail totes elevated with your brand identity.',
     tagline: 'UNITED IMPEX / RETAIL CARRYWARE',
+    mobileHeadlineMain: 'Carry Your',
+    mobileHeadlineHighlight: 'Brand Further.',
+    mobileSubheadline: 'Beautifully presented bags, made for memorable retail experiences.',
+    mobileCtaLabel: 'Explore Bags',
   },
   {
     id: 'real-diaries',
@@ -66,6 +78,10 @@ export const HERO_PHOTO_SLIDES: HeroPhotoSlideData[] = [
     headlineHighlight: 'feel considered.',
     subheadline: 'Executive corporate diaries, debossed planners, and bespoke stationery.',
     tagline: 'UNITED IMPEX / CORPORATE PRINT',
+    mobileHeadlineMain: 'Every Detail',
+    mobileHeadlineHighlight: 'Matters.',
+    mobileSubheadline: 'Professional stationery with a distinct brand identity.',
+    mobileCtaLabel: 'Explore Diaries',
   },
 ];
 
@@ -533,19 +549,19 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCustomizer }) => {
         </div>
 
         {/* ================================================================ */}
-        {/* MOBILE & TABLET UNIFIED ART-DIRECTED HERO (< 1024px)              */}
-        {/* High-Contrast Editorial Text + Pure Studio Product Stage + Cup    */}
+        {/* MOBILE & TABLET EDITORIAL LUXURY HERO (< 1024px)                  */}
+        {/* Kinetic & Northen Reference-Aligned: Bold Title, 9:16 Photo, CTA  */}
         {/* ================================================================ */}
-        <div className="block lg:hidden">
+        <div className="block lg:hidden w-full">
           <div 
-            className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_12px_40px_-12px_rgba(0,0,0,0.12)] border border-zinc-200/90 bg-[#FBF9F7]"
+            className="relative w-full overflow-hidden"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
-            {/* Sliding Track with Mobile WebP Photos */}
+            {/* Sliding Track with 9:16 Mobile WebP Photos */}
             <div 
-              className={`flex w-full min-w-0 ${isReducedMotion ? '' : 'transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]'}`}
+              className={`flex w-full min-w-0 ${isReducedMotion ? '' : 'transition-transform duration-600 ease-[cubic-bezier(0.25,1,0.5,1)]'}`}
               style={{
                 transform: `translateX(-${currentSlideIndex * 100}%)`,
               }}
@@ -553,127 +569,66 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCustomizer }) => {
               {HERO_PHOTO_SLIDES.map((slide, sIdx) => (
                 <div
                   key={slide.id}
-                  className="w-full min-w-full max-w-full shrink-0 flex flex-col bg-[#FBF9F7] overflow-hidden"
+                  className="w-full min-w-full max-w-full shrink-0 flex flex-col items-center bg-transparent overflow-hidden px-1 sm:px-2"
                   aria-hidden={currentSlideIndex !== sIdx}
                 >
-                  {/* Top Content Zone: Pristine text background, 100% readable */}
-                  <div className="p-4 sm:p-6 pb-3 bg-gradient-to-b from-[#F7F4F2] via-[#FBF9F7] to-[#FBF9F7]">
-                    <div className="flex items-center justify-between gap-2 mb-2.5">
-                      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white border border-black/10 text-[11px] font-bold uppercase tracking-wider font-mono shadow-2xs">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#EB1767]" />
-                        <span className="text-[#121216]">{slide.kicker}</span>
-                      </div>
-                      <div className="flex items-center gap-1 text-[11px] font-mono text-zinc-500 font-semibold">
-                        <MapPin className="w-3 h-3 text-[#EB1767]" />
-                        <span>Karachi &amp; Multan</span>
-                      </div>
-                    </div>
+                  {/* 1. Compact Centered Headline (Max 5-7 words) */}
+                  <h1 className="hero-slide-title text-2xl sm:text-3xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight text-center leading-[1.2] px-2">
+                    {slide.mobileHeadlineMain}{' '}
+                    <span className="text-[#EB1767]">{slide.mobileHeadlineHighlight}</span>
+                  </h1>
 
-                    <h1 className="hero-slide-title text-2xl sm:text-3xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight leading-[1.16] break-words">
-                      {slide.headlineMain} <br />
-                      <span className="text-[#EB1767]">{slide.headlineHighlight}</span>
-                    </h1>
+                  {/* 2. Short Supporting Line (Max 10-14 words) */}
+                  <p className="hero-slide-desc mt-1.5 text-xs sm:text-sm text-zinc-500 font-['Inter',sans-serif] text-center max-w-[310px] mx-auto leading-relaxed px-2">
+                    {slide.mobileSubheadline}
+                  </p>
 
-                    <p className="hero-slide-desc mt-1.5 text-xs sm:text-sm text-zinc-600 leading-relaxed font-['Inter',sans-serif] max-w-sm">
-                      {slide.subheadline}
-                    </p>
-
-                    {/* CTAs */}
-                    <div className="hero-slide-cta mt-3 flex items-center gap-2.5">
-                      <Link
-                        href={slide.ctaRoute}
-                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-white font-bold text-xs shadow-sm active:scale-95 transition-all min-h-[42px] bg-[#EB1767] hover:bg-[#d01359]"
-                        aria-label={slide.ctaLabel}
-                      >
-                        <span>Explore Collection</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
-
-                      {onOpenCustomizer && (
-                        <button
-                          type="button"
-                          onClick={() => onOpenCustomizer('cups')}
-                          className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-full bg-white text-zinc-800 font-semibold text-xs border border-zinc-200/90 shadow-2xs active:scale-95 transition-all min-h-[42px] cursor-pointer"
-                        >
-                          <Palette className="w-3.5 h-3.5 text-[#EB1767]" />
-                          <span>2D Studio</span>
-                        </button>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Dedicated Photographic Showcase Stage (100% Rich, Unobstructed Product Photography) */}
-                  <div className="relative w-full aspect-[16/11] sm:aspect-[16/9] bg-[#EFE7E4] overflow-hidden border-t border-zinc-200/50">
+                  {/* 3. Prominently Visible 9:16 Photographic Hero Slide (Contained Portrait Panel) */}
+                  <div className="relative w-full aspect-[9/13] max-h-[500px] rounded-[24px] sm:rounded-[28px] overflow-hidden shadow-[0_16px_40px_-12px_rgba(0,0,0,0.14)] border border-zinc-200/80 bg-[#F5F2F0] mt-3.5 select-none">
                     <img
                       src={slide.mobilePhoto}
                       alt={slide.name}
-                      width={900}
-                      height={950}
-                      loading={sIdx === 0 ? 'eager' : 'lazy'}
+                      width={1080}
+                      height={1920}
+                      loading="eager" fetchPriority={sIdx === 0 ? "high" : "auto"}
                       decoding="async"
                       className="w-full h-full object-cover object-bottom select-none pointer-events-none"
                     />
 
-                    {/* Integrated Mobile Coffee Cup Anchor (Resting naturally on the stage surface) */}
-                    <div className="absolute right-3.5 bottom-2 sm:right-6 sm:bottom-3 w-20 h-20 sm:w-24 sm:h-24 z-10 flex items-center justify-center pointer-events-none">
-                      {/* Realistic Ground Contact Shadow */}
-                      <div 
-                        className="absolute bottom-1 left-1/2 -translate-x-1/2 w-14 sm:w-16 h-2 bg-black/25 blur-[3px] rounded-full pointer-events-none" 
-                        aria-hidden="true"
-                      />
-                      <img
-                        id={sIdx === currentSlideIndex ? 'hero-scroll-cup-mobile' : undefined}
-                        src={cupPng}
-                        alt="Custom printed disposable coffee cup by United Impex"
-                        width={200}
-                        height={200}
-                        loading="eager"
-                        fetchPriority="high"
-                        className="w-full h-full object-contain select-none drop-shadow-md transform -rotate-3"
-                      />
+                    {/* Subtle Base Vignette to Ensure Clean Button Lift */}
+                    <div 
+                      className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/40 via-black/10 to-transparent pointer-events-none" 
+                      aria-hidden="true" 
+                    />
+
+                    {/* 4. Single Main CTA (Max 2-3 words, Clean Floating Capsule) */}
+                    <div className="absolute inset-x-0 bottom-4 px-4 flex items-center justify-center z-20 pointer-events-auto">
+                      <Link
+                        href={slide.ctaRoute}
+                        className="btn-primary inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full text-xs font-bold text-white shadow-xl active:scale-95 transition-all min-h-[46px] backdrop-blur-md"
+                        aria-label={slide.ctaLabel}
+                      >
+                        <span>{slide.mobileCtaLabel}</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
                     </div>
                   </div>
 
-                  {/* Bottom Navigation Dots & Indicator Bar */}
-                  <div className="px-4 py-2.5 bg-[#FBF9F7] border-t border-zinc-200/70 flex items-center justify-between">
-                    <div className="flex items-center gap-1.5">
-                      {HERO_PHOTO_SLIDES.map((_, dotIdx) => (
-                        <button
-                          key={dotIdx}
-                          type="button"
-                          onClick={() => setCurrentSlideIndex(dotIdx)}
-                          className={`h-1.5 rounded-full transition-all duration-300 ${
-                            currentSlideIndex === dotIdx ? 'w-5 bg-[#121216]' : 'w-1.5 bg-zinc-300'
-                          }`}
-                          aria-label={`Slide ${dotIdx + 1}`}
-                        />
-                      ))}
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono font-bold text-zinc-500">
-                        0{currentSlideIndex + 1} / 0{HERO_PHOTO_SLIDES.length}
-                      </span>
-                      <div className="flex items-center gap-1">
-                        <button
-                          type="button"
-                          onClick={handlePrev}
-                          className="w-7 h-7 rounded-full flex items-center justify-center bg-white border border-zinc-200 text-zinc-700 shadow-2xs active:scale-90"
-                          aria-label="Previous"
-                        >
-                          <ChevronLeft className="w-3.5 h-3.5" />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={handleNext}
-                          className="w-7 h-7 rounded-full flex items-center justify-center bg-white border border-zinc-200 text-zinc-700 shadow-2xs active:scale-90"
-                          aria-label="Next"
-                        >
-                          <ChevronRight className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-                    </div>
+                  {/* 5. Minimal Slide Indicators */}
+                  <div className="mt-3.5 flex items-center justify-center gap-2">
+                    {HERO_PHOTO_SLIDES.map((_, dotIdx) => (
+                      <button
+                        key={dotIdx}
+                        type="button"
+                        onClick={() => setCurrentSlideIndex(dotIdx)}
+                        aria-label={`Slide ${dotIdx + 1}`}
+                        className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                          currentSlideIndex === dotIdx ? 'w-6 bg-[#121216]' : 'w-1.5 bg-zinc-300'
+                        }`}
+                      />
+                    ))}
                   </div>
+
                 </div>
               ))}
             </div>

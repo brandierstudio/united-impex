@@ -15,7 +15,7 @@ export const PedestalLanding: React.FC<PedestalLandingProps> = ({ onOpenCustomiz
     <section
       id="table-showcase"
       aria-labelledby="landing-heading"
-      className="relative w-full bg-[#121216] text-white py-10 sm:py-14 lg:py-16 border-b border-zinc-800 overflow-hidden"
+      className="hidden md:block relative w-full bg-[#121216] text-white py-10 sm:py-14 lg:py-16 border-b border-zinc-800 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         

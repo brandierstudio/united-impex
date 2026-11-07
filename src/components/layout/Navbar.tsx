@@ -110,7 +110,7 @@ export const Navbar: React.FC = () => {
   return (
     <div 
       id="mobile-top-navbar"
-      className="relative md:sticky md:top-3.5 z-40 w-full px-3 sm:px-6 pointer-events-none transition-all duration-300"
+      className="sticky top-2.5 md:top-3.5 z-40 w-full px-3 sm:px-6 pointer-events-none transition-all duration-300"
     >
       <div className="w-full max-w-[1080px] mx-auto">
         
@@ -262,18 +262,18 @@ export const Navbar: React.FC = () => {
         </header>
 
         {/* ============================================================== */}
-        {/* 2. MOBILE SINGLE-ROW HEADER (< 768px)                          */}
-        {/* Compact, clean, 1 row only. Zero clutter.                      */}
+        {/* 2. MOBILE FLOATING LIQUID GLASS PILL (< 768px)                 */}
+        {/* Compact, rounded-full capsule. Official logo + Call, Cart, Menu*/}
         {/* ============================================================== */}
         <header
           role="banner"
-          aria-label="Mobile Header"
-          className="md:hidden pointer-events-auto mt-2 w-full glass-surface rounded-2xl px-3 py-2 flex items-center justify-between shadow-xs transition-all border border-zinc-200/80"
+          aria-label="Mobile Navigation Bar"
+          className="md:hidden pointer-events-auto w-full glass-surface rounded-full px-3.5 py-1.5 flex items-center justify-between shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all border border-zinc-200/80 bg-white/85 backdrop-blur-xl"
         >
           {/* Mobile Left: Official Vector Logo */}
           <Link 
             href="/"
-            className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] rounded-lg transition-transform hover:opacity-90 active:scale-95"
+            className="flex items-center min-h-[44px] px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] rounded-lg transition-transform hover:opacity-90 active:scale-95"
             aria-label={`${COMPANY_IDENTITY.name} — Home`}
           >
             <img 
@@ -283,35 +283,26 @@ export const Navbar: React.FC = () => {
             />
           </Link>
 
-          {/* Mobile Right: Single-Row Icon Cluster */}
-          <div className="flex items-center gap-1 sm:gap-1.5">
-            {/* Call Action (Icon ONLY on mobile as per requirement) */}
+          {/* Mobile Right: Streamlined 3-Control Cluster (Call, Cart, Menu) */}
+          <div className="flex items-center gap-1">
+            {/* Call Action (Icon ONLY on mobile linking to verified tel) */}
             <a
               href={CONTACT_INFO.phoneTel}
               aria-label={`Call United Impex: ${CONTACT_INFO.phoneDisplay}`}
-              className="p-2 rounded-xl bg-zinc-100/80 hover:bg-pink-50 text-zinc-700 hover:text-[#EB1767] active:scale-90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
+              className="w-11 h-11 rounded-full flex items-center justify-center bg-zinc-100/80 hover:bg-pink-50 text-zinc-700 hover:text-[#EB1767] active:scale-90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
             >
               <Phone className="w-4 h-4 text-[#EB1767]" />
             </a>
-
-            {/* Products Shortcut Icon */}
-            <Link
-              href="/products"
-              aria-label="All Products"
-              className="p-2 rounded-xl bg-zinc-100/80 hover:bg-pink-50 text-zinc-700 hover:text-[#EB1767] active:scale-90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
-            >
-              <Package className="w-4 h-4" />
-            </Link>
 
             {/* Shopping Cart Icon with Badge */}
             <Link
               href="/cart"
               aria-label={`Cart, ${totalItemsCount} items`}
-              className="relative p-2 rounded-xl bg-zinc-100/80 hover:bg-pink-50 text-zinc-700 hover:text-[#EB1767] active:scale-90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
+              className="relative w-11 h-11 rounded-full flex items-center justify-center bg-zinc-100/80 hover:bg-pink-50 text-zinc-700 hover:text-[#EB1767] active:scale-90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
             >
               <ShoppingBag className="w-4 h-4" />
               {totalItemsCount > 0 && (
-                <span className="absolute -top-1 -right-1 min-w-[16px] h-4 px-0.5 rounded-full bg-[#EB1767] text-white text-[9px] font-bold flex items-center justify-center shadow-2xs">
+                <span className="absolute top-1.5 right-1.5 min-w-[16px] h-4 px-0.5 rounded-full bg-[#EB1767] text-white text-[9px] font-bold flex items-center justify-center shadow-2xs">
                   {totalItemsCount}
                 </span>
               )}
@@ -323,7 +314,7 @@ export const Navbar: React.FC = () => {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-expanded={mobileMenuOpen}
               aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
-              className="p-2 rounded-xl bg-zinc-100/80 hover:bg-pink-50 text-zinc-700 hover:text-[#EB1767] active:scale-90 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
+              className="w-11 h-11 rounded-full flex items-center justify-center bg-zinc-100/80 hover:bg-pink-50 text-zinc-700 hover:text-[#EB1767] active:scale-90 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
             >
               {mobileMenuOpen ? (
                 <X className="w-4 h-4 text-[#EB1767]" />
@@ -338,12 +329,12 @@ export const Navbar: React.FC = () => {
         {mobileMenuOpen && (
           <div 
             ref={mobileDrawerRef}
-            className="md:hidden pointer-events-auto mt-2 w-full glass-surface rounded-2xl p-3 shadow-xl border border-zinc-200/90 animate-in fade-in slide-in-from-top-2 duration-200"
+            className="md:hidden pointer-events-auto mt-2 w-full glass-surface rounded-3xl p-4 shadow-xl border border-zinc-200/90 bg-white/95 backdrop-blur-2xl animate-in fade-in slide-in-from-top-2 duration-200"
           >
             <nav aria-label="Mobile Drawer Navigation" className="space-y-1">
               <Link
                 href="/"
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                className={`flex items-center gap-3 px-3.5 py-3 rounded-2xl text-sm font-semibold transition-colors min-h-[44px] ${
                   location === '/' ? 'bg-pink-50 text-[#EB1767]' : 'text-zinc-700 hover:bg-zinc-100'
                 }`}
               >
@@ -353,7 +344,7 @@ export const Navbar: React.FC = () => {
 
               <Link
                 href="/products"
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                className={`flex items-center gap-3 px-3.5 py-3 rounded-2xl text-sm font-semibold transition-colors min-h-[44px] ${
                   location.startsWith('/products') ? 'bg-pink-50 text-[#EB1767]' : 'text-zinc-700 hover:bg-zinc-100'
                 }`}
               >
@@ -361,12 +352,12 @@ export const Navbar: React.FC = () => {
                 <span>Products Catalog</span>
               </Link>
 
-              <div className="pl-9 pr-2 py-1 space-y-1">
+              <div className="pl-10 pr-2 py-1 space-y-1">
                 {CORE_PRODUCT_CATEGORIES.map((cat) => (
                   <Link
                     key={cat.id}
                     href={`/products/${cat.slug}`}
-                    className="block text-xs font-medium text-zinc-600 hover:text-[#EB1767] py-1"
+                    className="block text-xs font-medium text-zinc-600 hover:text-[#EB1767] py-1.5 min-h-[36px] flex items-center"
                   >
                     &bull; {cat.title}
                   </Link>
@@ -375,7 +366,7 @@ export const Navbar: React.FC = () => {
 
               <Link
                 href="/about"
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                className={`flex items-center gap-3 px-3.5 py-3 rounded-2xl text-sm font-semibold transition-colors min-h-[44px] ${
                   location === '/about' ? 'bg-pink-50 text-[#EB1767]' : 'text-zinc-700 hover:bg-zinc-100'
                 }`}
               >
@@ -385,7 +376,7 @@ export const Navbar: React.FC = () => {
 
               <Link
                 href="/contact"
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                className={`flex items-center gap-3 px-3.5 py-3 rounded-2xl text-sm font-semibold transition-colors min-h-[44px] ${
                   location === '/contact' ? 'bg-pink-50 text-[#EB1767]' : 'text-zinc-700 hover:bg-zinc-100'
                 }`}
               >
@@ -396,7 +387,7 @@ export const Navbar: React.FC = () => {
               <div className="pt-2 mt-2 border-t border-zinc-100">
                 <Link
                   href="/quote"
-                  className="btn-primary w-full text-xs font-semibold py-2.5 flex items-center justify-center gap-2"
+                  className="btn-primary w-full text-xs font-semibold py-3 flex items-center justify-center gap-2 min-h-[44px]"
                 >
                   <FileText className="w-4 h-4" />
                   <span>Request a Custom Quote</span>

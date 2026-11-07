@@ -154,11 +154,11 @@ export const PackagingComparison: React.FC<PackagingComparisonProps> = ({
           </div>
         </div>
 
-        {/* Clean Layout: Main Comparison Slider + Right Reserved Cup Anchor */}
+        {/* Clean Layout: Main Comparison Slider + Right Reserved Cup Anchor on Desktop */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
           
-          {/* Main Interactive Comparison Viewport (Centred Focus) */}
-          <div className="reveal-media lg:col-span-9">
+          {/* Main Interactive Comparison Viewport (Centred Focus, Full-width Touch Slider on Mobile) */}
+          <div className="reveal-media col-span-12 lg:col-span-9">
             <div
               ref={containerRef}
               className="relative w-full aspect-[4/3] sm:aspect-[16/10] max-h-[500px] rounded-2xl bg-white border border-[#EB1767]/20 shadow-[0_8px_30px_-10px_rgba(235,23,103,0.1)] overflow-hidden cursor-ew-resize touch-none select-none"
@@ -230,10 +230,10 @@ export const PackagingComparison: React.FC<PackagingComparisonProps> = ({
             </div>
           </div>
 
-          {/* CUP ANCHOR 2: RIGHT SIDEWAY POINT (Compact, clean reserved area) */}
+          {/* CUP ANCHOR 2: RIGHT SIDEWAY POINT (Preserved strictly on Desktop for Cup Waypoint) */}
           <div 
             id="cup-anchor-2"
-            className="lg:col-span-3 rounded-2xl bg-white/90 border border-[#EB1767]/20 p-5 flex flex-col justify-between shadow-xs min-h-[160px] lg:min-h-[380px]"
+            className="hidden lg:flex lg:col-span-3 rounded-2xl bg-white/90 border border-[#EB1767]/20 p-5 flex-col justify-between shadow-xs min-h-[380px]"
           >
             <div>
               <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#EB1767] block mb-1">

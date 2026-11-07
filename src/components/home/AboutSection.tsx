@@ -37,11 +37,11 @@ export const AboutSection: React.FC = () => {
           </p>
         </div>
 
-        {/* 12-Column Layout: Left 8 cols for Director Profile & Cards, Right 4 cols for Cup Anchor 4 */}
+        {/* 12-Column Layout: Left 8 cols for Profile & Cards, Right 4 cols for Cup Anchor 4 on Desktop */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           
-          {/* LEFT 8 COLS: PROFILE, BUSINESS CARDS & SCOPE */}
-          <div className="lg:col-span-8 space-y-4">
+          {/* PROFILE, BUSINESS CARDS & SCOPE (Full-width on Mobile) */}
+          <div className="col-span-12 lg:col-span-8 space-y-4">
             
             {/* Split: Director Areeb Ashraf + Interactive Visiting Card */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-stretch">
@@ -142,10 +142,10 @@ export const AboutSection: React.FC = () => {
 
           </div>
 
-          {/* CUP ANCHOR 4: RIGHT SIDEWAY POINT */}
+          {/* CUP ANCHOR 4: RIGHT SIDEWAY POINT (Preserved on Desktop for Cup Waypoint) */}
           <div 
             id="cup-anchor-4"
-            className="lg:col-span-4 rounded-2xl bg-white border border-[#EB1767]/20 p-5 sm:p-6 flex flex-col justify-between shadow-xs min-h-[220px] lg:min-h-[360px] text-[#121216]"
+            className="hidden lg:flex lg:col-span-4 rounded-2xl bg-white border border-[#EB1767]/20 p-5 sm:p-6 flex-col justify-between shadow-xs min-h-[360px] text-[#121216]"
           >
             <div>
               <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#EB1767] block mb-1">

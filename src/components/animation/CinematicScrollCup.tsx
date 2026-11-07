@@ -12,6 +12,12 @@ export const CinematicScrollCup: React.FC = () => {
   const trailRef = useRef<HTMLDivElement>(null);
   const trailSvgRef = useRef<SVGSVGElement>(null);
   const [isReducedMotion, setIsReducedMotion] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768;
+    }
+    return false;
+  });
   const [isReady, setIsReady] = useState<boolean>(false);
 
   useEffect(() => {
@@ -27,17 +33,25 @@ export const CinematicScrollCup: React.FC = () => {
     };
     mediaQuery.addEventListener('change', handleMediaChange);
 
-    // 2. Elements Identification & Precision Waypoints Setup
+    // 2. Strict Mobile Immunity: Completely disable cup animation engine on mobile (< 768px)
+    if (window.innerWidth < 768) {
+      setIsMobile(true);
+      return;
+    }
+
+    // 3. Desktop Elements Identification & Precision Waypoints Setup
     let ctx: gsap.Context | null = null;
     let fadeTimeout: ReturnType<typeof setTimeout> | null = null;
 
     const initAnimation = () => {
+      if (window.innerWidth < 768) {
+        if (ctx) ctx.revert();
+        return;
+      }
+
       if (ctx) ctx.revert();
 
-      const isMobile = window.innerWidth < 1024;
-      const heroCupEl = isMobile
-        ? document.getElementById('hero-scroll-cup-mobile') || document.getElementById('hero-scroll-cup')
-        : document.getElementById('hero-scroll-cup');
+      const heroCupEl = document.getElementById('hero-scroll-cup');
       const targetEl = document.getElementById('cup-table-landing-target');
       const heroSection = document.getElementById('hero');
       const tableStaticCup = document.getElementById('table-static-cup');
@@ -276,8 +290,14 @@ export const CinematicScrollCup: React.FC = () => {
     const timer = setTimeout(initAnimation, 160);
 
     const handleResize = () => {
-      initAnimation();
-      ScrollTrigger.refresh();
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (mobile) {
+        if (ctx) ctx.revert();
+      } else {
+        initAnimation();
+        ScrollTrigger.refresh();
+      }
     };
     window.addEventListener('resize', handleResize);
     window.addEventListener('load', handleResize);
@@ -299,9 +319,9 @@ export const CinematicScrollCup: React.FC = () => {
       if (heroMobile) heroMobile.style.opacity = '1';
       if (tCup) tCup.style.opacity = '1';
     };
-  }, [isReducedMotion]);
+  }, [isReducedMotion, isMobile]);
 
-  if (isReducedMotion) {
+  if (isReducedMotion || isMobile) {
     return null;
   }
 
