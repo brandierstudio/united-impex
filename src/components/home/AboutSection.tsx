@@ -3,8 +3,6 @@ import {
   Building2, 
   MapPin, 
   ArrowRight, 
-  Award, 
-  Layers, 
   RotateCw 
 } from 'lucide-react';
 import { Link } from 'wouter';
@@ -21,65 +19,36 @@ export const AboutSection: React.FC = () => {
     <section 
       id="about" 
       aria-labelledby="about-heading"
-      className="relative w-full bg-[#FDF2F6] text-[#121216] py-16 sm:py-20 lg:py-24 border-b border-[#EB1767]/15 overflow-hidden"
+      className="relative w-full bg-[#FDF2F6] text-[#121216] py-10 sm:py-14 lg:py-16 border-b border-[#EB1767]/15 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header (Soft Blush Background) */}
-        <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-[#EB1767]/20 text-[#EB1767] text-xs font-semibold uppercase tracking-wider mb-3 shadow-2xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#EB1767]" aria-hidden="true" />
-            <span>Company Leadership &amp; Story</span>
-          </div>
-
+        {/* Section Header without redundant eyebrow pill */}
+        <div className="max-w-2xl mb-8 sm:mb-10">
           <h2 
             id="about-heading"
-            className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight leading-tight"
+            className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight leading-tight"
           >
             Commercial Printing &amp; Custom Packaging Partner.
           </h2>
 
-          <p className="mt-3 text-sm sm:text-base text-zinc-600 leading-relaxed max-w-2xl font-['Inter',sans-serif]">
-            United Impex operates as a trusted commercial offset printer, general order supplier, and bespoke packaging company, serving businesses across Pakistan through dedicated coordination offices in Karachi and Multan.
+          <p className="mt-2 text-xs sm:text-sm text-zinc-600 leading-relaxed font-['Inter',sans-serif]">
+            United Impex operates as an offset printer, general order supplier, and packaging company with verified coordination offices in Karachi and Multan.
           </p>
         </div>
 
-        {/* 12-Column Layout: Left 8 cols for Narrative & Visiting Cards, Right 4 cols for Cup Anchor 4 (RIGHT) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        {/* 12-Column Layout: Left 8 cols for Director Profile & Cards, Right 4 cols for Cup Anchor 4 */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           
-          {/* ===================================================================
-              LEFT 8 COLS: COMPANY SCOPE, DIRECTOR PROFILE, & BUSINESS CARDS
-              =================================================================== */}
-          <div className="lg:col-span-8 space-y-8">
+          {/* LEFT 8 COLS: PROFILE, BUSINESS CARDS & SCOPE */}
+          <div className="lg:col-span-8 space-y-4">
             
-            {/* Core Capability Pillars */}
-            <div className="space-y-4">
-              <h3 className="text-base sm:text-lg font-bold font-['Outfit',sans-serif] text-[#121216] flex items-center gap-2">
-                <Layers className="w-4 h-4 text-[#EB1767]" />
-                <span>Our Core Business Scope</span>
-              </h3>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {COMPANY_IDENTITY.natureOfBusiness.map((item, idx) => (
-                  <div 
-                    key={idx}
-                    className="p-4 rounded-2xl bg-white text-[#121216] border border-[#EB1767]/15 flex items-start gap-3 shadow-xs"
-                  >
-                    <div className="w-2 h-2 rounded-full bg-[#EB1767] mt-1.5 shrink-0" />
-                    <span className="text-xs sm:text-sm font-semibold text-zinc-900 leading-snug">
-                      {item}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Split: Director Areeb Ashraf Profile + Interactive Visiting Card */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-stretch">
+            {/* Split: Director Areeb Ashraf + Interactive Visiting Card */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-stretch">
               
               {/* Director Card */}
-              <div className="p-5 sm:p-6 rounded-3xl bg-white text-[#121216] border border-[#EB1767]/15 flex items-center gap-4 shadow-xs">
-                <div className="relative w-20 h-20 rounded-2xl overflow-hidden shrink-0 border border-zinc-200 shadow-2xs">
+              <div className="p-4 sm:p-5 rounded-2xl bg-white text-[#121216] border border-[#EB1767]/15 flex items-center gap-3.5 shadow-2xs">
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden shrink-0 border border-zinc-200 shadow-2xs">
                   <img
                     src={areebAshrafWebp}
                     alt="Areeb Ashraf, Director at United Impex"
@@ -93,35 +62,35 @@ export const AboutSection: React.FC = () => {
                   <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#EB1767]">
                     Executive Leadership
                   </span>
-                  <h4 className="text-base font-bold text-zinc-900 font-['Outfit',sans-serif]">
+                  <h4 className="text-sm sm:text-base font-bold text-zinc-900 font-['Outfit',sans-serif]">
                     {COMPANY_IDENTITY.leadership.name}
                   </h4>
                   <p className="text-xs text-zinc-600 font-medium">
                     {COMPANY_IDENTITY.leadership.designation}
                   </p>
-                  <p className="text-[11px] text-zinc-400 mt-1">
+                  <p className="text-[11px] text-zinc-500 mt-0.5">
                     Director of Business &amp; Operations
                   </p>
                 </div>
               </div>
 
               {/* Interactive Card Preview */}
-              <div className="p-4 sm:p-5 rounded-3xl bg-white text-[#121216] border border-[#EB1767]/15 flex flex-col justify-between shadow-xs">
+              <div className="p-3.5 sm:p-4 rounded-2xl bg-white text-[#121216] border border-[#EB1767]/15 flex flex-col justify-between shadow-2xs">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[11px] font-bold text-zinc-700 uppercase font-mono">
-                    Official Business Card ({activeCardSide})
+                  <span className="text-[10px] font-bold text-zinc-700 uppercase font-mono">
+                    Visiting Card ({activeCardSide})
                   </span>
                   <button
                     type="button"
                     onClick={() => setActiveCardSide(prev => prev === 'front' ? 'back' : 'front')}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-zinc-100 hover:bg-zinc-200 text-zinc-800 transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-zinc-100 hover:bg-zinc-200 text-zinc-800 transition-colors cursor-pointer"
                   >
                     <RotateCw className="w-3 h-3 text-[#EB1767]" />
-                    <span>Flip Card</span>
+                    <span>Flip</span>
                   </button>
                 </div>
 
-                <div className="relative aspect-[16/9] w-full rounded-xl overflow-hidden border border-zinc-200 bg-zinc-50">
+                <div className="relative aspect-[16/9] w-full rounded-lg overflow-hidden border border-zinc-200 bg-zinc-50">
                   <img
                     src={activeCardSide === 'front' ? cardFrontPng : cardBackPng}
                     alt={`United Impex official visiting card (${activeCardSide} side)`}
@@ -133,12 +102,27 @@ export const AboutSection: React.FC = () => {
 
             </div>
 
-            {/* Dual Coordinated Offices */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Core Capability Badges */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {COMPANY_IDENTITY.natureOfBusiness.map((item, idx) => (
+                <div 
+                  key={idx}
+                  className="p-2.5 rounded-xl bg-white text-[#121216] border border-[#EB1767]/15 flex items-center gap-2 shadow-2xs"
+                >
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#EB1767] shrink-0" />
+                  <span className="text-[11px] sm:text-xs font-semibold text-zinc-900 truncate">
+                    {item}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* Dual Offices */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {OFFICE_LOCATIONS.map((office) => (
                 <div 
                   key={office.city}
-                  className="p-4 rounded-2xl bg-white text-[#121216] border border-[#EB1767]/15 space-y-1.5 shadow-2xs"
+                  className="p-3.5 rounded-xl bg-white text-[#121216] border border-[#EB1767]/15 space-y-1 shadow-2xs"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-zinc-900 flex items-center gap-1.5 font-['Outfit',sans-serif]">
@@ -146,10 +130,10 @@ export const AboutSection: React.FC = () => {
                       <span>{office.type}</span>
                     </span>
                     <span className="text-[10px] text-[#EB1767] font-semibold bg-[#FDF2F6] px-2 py-0.5 rounded-full border border-[#EB1767]/20">
-                      By Prior Appointment
+                      By Appointment
                     </span>
                   </div>
-                  <p className="text-xs text-zinc-600 leading-relaxed font-['Inter',sans-serif]">
+                  <p className="text-[11px] text-zinc-600 leading-relaxed font-['Inter',sans-serif] line-clamp-2">
                     {office.address}
                   </p>
                 </div>
@@ -158,57 +142,35 @@ export const AboutSection: React.FC = () => {
 
           </div>
 
-          {/* ===================================================================
-              CUP ANCHOR 4: RIGHT SIDEWAY POINT (Reserved space for travelling cup)
-              =================================================================== */}
+          {/* CUP ANCHOR 4: RIGHT SIDEWAY POINT */}
           <div 
             id="cup-anchor-4"
-            className="lg:col-span-4 rounded-3xl bg-white border border-[#EB1767]/20 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group shadow-md min-h-[380px] text-[#121216]"
+            className="lg:col-span-4 rounded-2xl bg-white border border-[#EB1767]/20 p-5 sm:p-6 flex flex-col justify-between shadow-xs min-h-[220px] lg:min-h-[360px] text-[#121216]"
           >
-            {/* Ambient magenta glow ring */}
-            <div 
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full bg-[#EB1767]/10 blur-2xl pointer-events-none" 
-              aria-hidden="true" 
-            />
-
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FDF2F6] text-[#EB1767] text-[11px] font-mono font-bold uppercase tracking-wider mb-4 border border-[#EB1767]/20">
-                <Award className="w-3.5 h-3.5" />
-                <span>Commercial Logistics</span>
-              </div>
-
-              <h3 className="text-xl sm:text-2xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight">
-                National Commercial Delivery
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#EB1767] block mb-1">
+                Logistics &amp; Reach
+              </span>
+              <h3 className="text-lg font-bold text-[#121216] font-['Outfit',sans-serif]">
+                Nationwide Commercial Supply
               </h3>
-
-              <p className="mt-2 text-xs sm:text-sm text-zinc-600 leading-relaxed font-['Inter',sans-serif]">
-                Direct order fulfillment from Karachi port to northern industrial hubs. Consistent color standards and certified bulk packaging.
+              <p className="mt-2 text-xs text-zinc-600 leading-relaxed font-['Inter',sans-serif]">
+                Direct order dispatch connecting Karachi port logistics and Punjab industrial hubs for commercial clients.
               </p>
             </div>
 
-            {/* Nationwide Metric Badge (Zero debug text, zero dashed rings) */}
-            <div className="my-4 p-4 sm:p-5 rounded-2xl bg-[#FDF2F6]/80 border border-[#EB1767]/20 flex items-center gap-3.5">
-              <span className="w-11 h-11 rounded-xl bg-white border border-[#EB1767]/20 flex items-center justify-center text-[#EB1767] font-bold text-xs shrink-0 font-mono shadow-2xs">
-                PAK
-              </span>
-              <div className="text-left">
-                <p className="text-xs font-bold text-[#121216]">Nationwide Industrial Logistics</p>
-                <p className="text-[11px] text-zinc-600">Direct freight dispatch from Karachi &amp; Multan</p>
-              </div>
-            </div>
-
-            <div className="space-y-2 pt-2 border-t border-[#EB1767]/15">
+            <div className="pt-4 border-t border-[#EB1767]/15 space-y-2 mt-4">
               <Link
                 href="/about"
-                className="btn-primary w-full text-xs sm:text-sm font-semibold min-h-[44px] flex items-center justify-center gap-2"
+                className="btn-primary w-full text-xs font-semibold py-2.5 flex items-center justify-center gap-1.5"
               >
                 <span>Read Full Company Story</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
 
-              <div className="flex items-center gap-2 text-xs text-zinc-500 justify-center">
-                <MapPin className="w-3.5 h-3.5 text-[#EB1767]" />
-                <span>Client Consultations By Appointment</span>
+              <div className="flex items-center gap-1 text-[11px] text-zinc-500 justify-center">
+                <MapPin className="w-3 h-3 text-[#EB1767]" />
+                <span>Consultations By Prior Appointment</span>
               </div>
             </div>
           </div>

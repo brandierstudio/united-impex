@@ -4,8 +4,7 @@ import {
   Layers,
   Box as BoxIcon,
   ChevronsLeftRight,
-  Palette,
-  CheckCircle2
+  Palette
 } from 'lucide-react';
 
 import beforeCupWebp from '../../assets/comparison/comparison-before-cup.webp';
@@ -40,7 +39,7 @@ export const PackagingComparison: React.FC<PackagingComparisonProps> = ({
 
   const beforeImage = selectedProduct === 'cup' ? beforeCupWebp : beforeBoxWebp;
   const afterImage = selectedProduct === 'cup' ? afterCupWebp : afterBoxWebp;
-  const productName = selectedProduct === 'cup' ? 'Takeaway Coffee Cup' : 'Luxury Packaging Box';
+  const productName = selectedProduct === 'cup' ? 'Takeaway Coffee Cup' : 'Packaging Box';
 
   const handleMove = useCallback((clientX: number) => {
     if (!containerRef.current) return;
@@ -50,7 +49,6 @@ export const PackagingComparison: React.FC<PackagingComparisonProps> = ({
     setSliderPos(percentage);
   }, []);
 
-  // Pointer & Touch Events for robust multi-device scrubbing
   const handlePointerDown = (e: React.PointerEvent) => {
     setIsDragging(true);
     (e.target as HTMLElement).setPointerCapture(e.pointerId);
@@ -106,68 +104,64 @@ export const PackagingComparison: React.FC<PackagingComparisonProps> = ({
     <section 
       id="comparison" 
       aria-labelledby="comparison-heading"
-      className="relative w-full bg-[#FDF2F6] text-[#121216] py-16 sm:py-20 lg:py-24 border-b border-[#EB1767]/15 overflow-hidden"
+      className="relative w-full bg-[#FDF2F6] text-[#121216] py-10 sm:py-14 lg:py-16 border-b border-[#EB1767]/15 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-[#EB1767]/20 text-[#EB1767] text-xs font-semibold uppercase tracking-wider mb-3 shadow-2xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#EB1767]" aria-hidden="true" />
-            <span>Packaging Transformation</span>
+        {/* Compact Section Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white border border-[#EB1767]/20 text-[#EB1767] text-[11px] font-semibold uppercase tracking-wider mb-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#EB1767]" aria-hidden="true" />
+              <span>Interactive Comparison</span>
+            </div>
+
+            <h2 
+              id="comparison-heading"
+              className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight"
+            >
+              See the Difference Custom Printing Makes.
+            </h2>
           </div>
 
-          <h2 
-            id="comparison-heading"
-            className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight leading-tight"
-          >
-            See the Difference Custom Printing Makes.
-          </h2>
-
-          <p className="mt-3 text-sm sm:text-base text-zinc-600 leading-relaxed max-w-2xl font-['Inter',sans-serif]">
-            Drag the slider to reveal how high-precision offset printing and bespoke dielines elevate blank, unbranded packaging into shelf-defining commercial products.
-          </p>
-
-          {/* Product Switcher Pills with Liquid Glass */}
-          <div className="mt-6 inline-flex items-center p-1 rounded-full glass-surface shadow-2xs">
+          {/* Product Switcher Pills */}
+          <div className="inline-flex items-center p-1 rounded-full bg-white/90 border border-[#EB1767]/20 shadow-2xs self-start sm:self-auto">
             <button
               type="button"
               onClick={() => setSelectedProduct('cup')}
-              className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${
                 selectedProduct === 'cup'
                   ? 'bg-[#EB1767] text-white shadow-xs'
                   : 'text-zinc-600 hover:text-[#121216]'
               }`}
             >
-              <Layers className="w-3.5 h-3.5" />
+              <Layers className="w-3 h-3" />
               <span>Coffee Cup</span>
             </button>
 
             <button
               type="button"
               onClick={() => setSelectedProduct('box')}
-              className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${
                 selectedProduct === 'box'
                   ? 'bg-[#EB1767] text-white shadow-xs'
                   : 'text-zinc-600 hover:text-[#121216]'
               }`}
             >
-              <BoxIcon className="w-3.5 h-3.5" />
+              <BoxIcon className="w-3 h-3" />
               <span>Packaging Box</span>
             </button>
           </div>
         </div>
 
-        {/* 12-Column Grid: Left 8 cols for Slider, Right 4 cols for Cup Anchor 2 (RIGHT) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        {/* Clean Layout: Main Comparison Slider + Right Reserved Cup Anchor */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
           
-          {/* ===================================================================
-              LEFT 8 COLS: INTERACTIVE COMPARISON VIEWPORT
-              =================================================================== */}
-          <div className="lg:col-span-8">
+          {/* Main Interactive Comparison Viewport (Centred Focus) */}
+          <div className="lg:col-span-9">
             <div
               ref={containerRef}
-              className="relative w-full aspect-square sm:aspect-[4/3] max-h-[560px] rounded-3xl bg-white border border-[#EB1767]/20 shadow-[0_12px_40px_-10px_rgba(235,23,103,0.08)] overflow-hidden cursor-ew-resize touch-none select-none"
+              className="relative w-full aspect-[4/3] sm:aspect-[16/10] max-h-[500px] rounded-2xl bg-white border border-[#EB1767]/20 shadow-[0_8px_30px_-10px_rgba(235,23,103,0.1)] overflow-hidden cursor-ew-resize touch-none select-none"
               onPointerDown={handlePointerDown}
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}
@@ -182,26 +176,26 @@ export const PackagingComparison: React.FC<PackagingComparisonProps> = ({
               aria-label={`Interactive before and after comparison slider for ${productName}`}
               onKeyDown={handleKeyDown}
             >
-              {/* 1. AFTER LAYER (Custom Printed Branded Mockup — Underneath) */}
+              {/* AFTER LAYER (Branded Mockup) */}
               <div className="absolute inset-0 w-full h-full">
                 <img
                   src={afterImage}
-                  alt={`${productName} — After custom printing and branding`}
+                  alt={`${productName} — After custom printing`}
                   width={1200}
-                  height={1200}
+                  height={900}
                   className="w-full h-full object-contain pointer-events-none"
                   loading="lazy"
                   decoding="async"
                 />
-                <div className="absolute top-4 right-4 z-10 pointer-events-none">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wide bg-[#121216] text-white shadow-xs border border-white/20">
-                    <span className="w-2 h-2 rounded-full bg-[#EB1767]" aria-hidden="true" />
-                    <span>AFTER: Custom Printed</span>
+                <div className="absolute top-3 right-3 z-10 pointer-events-none">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wide bg-[#121216] text-white shadow-xs border border-white/20">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#EB1767]" aria-hidden="true" />
+                    <span>AFTER: Printed</span>
                   </span>
                 </div>
               </div>
 
-              {/* 2. BEFORE LAYER (Unbranded Blank Mockup — Top Clipped Layer) */}
+              {/* BEFORE LAYER (Plain Mockup) */}
               <div 
                 className="absolute inset-0 w-full h-full overflow-hidden will-change-[clip-path]"
                 style={{
@@ -210,88 +204,61 @@ export const PackagingComparison: React.FC<PackagingComparisonProps> = ({
               >
                 <img
                   src={beforeImage}
-                  alt={`${productName} — Before branding, blank unprinted`}
+                  alt={`${productName} — Before branding`}
                   width={1200}
-                  height={1200}
+                  height={900}
                   className="w-full h-full object-contain pointer-events-none bg-white"
                   loading="lazy"
                   decoding="async"
                 />
-                <div className="absolute top-4 left-4 z-10 pointer-events-none">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wide bg-zinc-700/90 text-white shadow-xs border border-white/10">
-                    <span>BEFORE: Plain Blank</span>
+                <div className="absolute top-3 left-3 z-10 pointer-events-none">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wide bg-zinc-700/90 text-white shadow-xs border border-white/10">
+                    <span>BEFORE: Plain</span>
                   </span>
                 </div>
               </div>
 
-              {/* 3. VERTICAL DIVIDER HANDLE BAR */}
+              {/* Vertical Scrub Divider */}
               <div
-                className="absolute top-0 bottom-0 w-1 bg-white shadow-[0_0_12px_rgba(0,0,0,0.35)] pointer-events-none z-20 will-change-[left]"
+                className="absolute top-0 bottom-0 w-0.5 bg-white shadow-[0_0_10px_rgba(0,0,0,0.35)] pointer-events-none z-20 will-change-[left]"
                 style={{ left: `${sliderPos}%` }}
               >
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white border-2 border-[#EB1767] shadow-lg flex items-center justify-center text-[#EB1767] pointer-events-auto cursor-ew-resize">
-                  <ChevronsLeftRight className="w-5 h-5 stroke-[2.5]" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white border-2 border-[#EB1767] shadow-md flex items-center justify-center text-[#EB1767] pointer-events-auto cursor-ew-resize">
+                  <ChevronsLeftRight className="w-4 h-4 stroke-[2.5]" />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* ===================================================================
-              CUP ANCHOR 2: RIGHT SIDEWAY POINT (Reserved space for travelling cup)
-              =================================================================== */}
+          {/* CUP ANCHOR 2: RIGHT SIDEWAY POINT (Compact, clean reserved area) */}
           <div 
             id="cup-anchor-2"
-            className="lg:col-span-4 rounded-3xl bg-white border border-[#EB1767]/20 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group shadow-md min-h-[380px]"
+            className="lg:col-span-3 rounded-2xl bg-white/90 border border-[#EB1767]/20 p-5 flex flex-col justify-between shadow-xs min-h-[160px] lg:min-h-[380px]"
           >
-            {/* Ambient soft glow ring */}
-            <div 
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full bg-[#EB1767]/10 blur-2xl pointer-events-none" 
-              aria-hidden="true"
-            />
-
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FDF2F6] text-[#EB1767] text-[11px] font-mono font-bold uppercase tracking-wider mb-4 border border-[#EB1767]/20">
-                <Palette className="w-3.5 h-3.5" />
-                <span>Print Fidelity Standard</span>
-              </div>
-
-              <h3 className="text-xl sm:text-2xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight">
-                Precision Litho Registration
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#EB1767] block mb-1">
+                Precision Print
+              </span>
+              <h3 className="text-base font-bold text-[#121216] font-['Outfit',sans-serif]">
+                High Fidelity Registration
               </h3>
-
-              <p className="mt-2 text-xs sm:text-sm text-zinc-600 leading-relaxed font-['Inter',sans-serif]">
-                Deep ink saturation, crisp dielines, and smooth protective finishes tailored to your brand artwork.
+              <p className="mt-1.5 text-xs text-zinc-600 leading-relaxed font-['Inter',sans-serif]">
+                Slide across to verify color saturation, razor-sharp dielines, and smooth protective finishes.
               </p>
             </div>
 
-            {/* Feature Callout Panel (Zero empty dashed debug placeholders) */}
-            <div className="my-4 p-4 sm:p-5 rounded-2xl bg-[#FDF2F6]/80 border border-[#EB1767]/20 flex items-center gap-3.5">
-              <span className="w-11 h-11 rounded-xl bg-white border border-[#EB1767]/20 flex items-center justify-center text-[#EB1767] font-bold text-xs shrink-0 font-mono shadow-2xs">
-                CMYK
-              </span>
-              <div className="text-left">
-                <p className="text-xs font-bold text-[#121216]">Commercial Press Calibration</p>
-                <p className="text-[11px] text-zinc-600">Sharp vector line reproduction &amp; rich contrast</p>
-              </div>
-            </div>
-
-            <div className="space-y-2 pt-2 border-t border-[#EB1767]/15">
+            <div className="pt-3 border-t border-[#EB1767]/15 mt-3">
               {onOpenCustomizer && (
                 <button
                   type="button"
                   onClick={() => onOpenCustomizer(selectedProduct === 'cup' ? 'cups' : 'boxes')}
-                  className="btn-primary w-full text-xs sm:text-sm font-semibold min-h-[44px] flex items-center justify-center gap-2"
+                  className="btn-primary w-full text-xs font-semibold py-2.5 flex items-center justify-center gap-1.5"
                 >
-                  <Palette className="w-4 h-4" />
-                  <span>Customize in 2D Studio</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                  <Palette className="w-3.5 h-3.5" />
+                  <span>Customize in 2D</span>
+                  <ArrowRight className="w-3 h-3" />
                 </button>
               )}
-
-              <div className="flex items-center gap-2 text-xs text-zinc-500 justify-center">
-                <CheckCircle2 className="w-3.5 h-3.5 text-zinc-700" />
-                <span>Drag slider to compare anytime</span>
-              </div>
             </div>
           </div>
 

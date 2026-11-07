@@ -364,3 +364,44 @@ h1, h2, h3, h4, h5, h6 {
     transform: none !important;
   }
 }
+
+/* =========================================================================
+   HERO SUSPENDED CUP MICRO-SWAY ANIMATION
+   Principles: Natural harmonic pendulum physics, anchor pivot at peg, WCAG reduced-motion
+   ========================================================================= */
+@keyframes hero-cup-sway {
+  0%, 100% {
+    transform: rotate(-0.85deg);
+  }
+  50% {
+    transform: rotate(0.85deg);
+  }
+}
+
+@keyframes hero-cup-shadow-sway {
+  0%, 100% {
+    transform: translateX(-3px) scaleX(0.98);
+  }
+  50% {
+    transform: translateX(3px) scaleX(1.02);
+  }
+}
+
+.animate-hero-cup-sway {
+  transform-origin: 50% 0px;
+  animation: hero-cup-sway 6.8s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite;
+  will-change: transform;
+}
+
+.animate-hero-cup-shadow {
+  animation: hero-cup-shadow-sway 6.8s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-cup-sway,
+  .animate-hero-cup-shadow {
+    animation: none !important;
+    transform: none !important;
+  }
+}

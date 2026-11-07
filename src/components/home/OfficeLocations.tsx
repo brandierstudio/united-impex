@@ -15,46 +15,47 @@ export const OfficeLocations: React.FC = () => {
     <section 
       id="locations" 
       aria-labelledby="locations-heading"
-      className="relative w-full bg-[#FDF2F6] text-[#121216] py-16 sm:py-20 lg:py-28 border-b border-[#EB1767]/15 overflow-hidden"
+      className="relative w-full bg-[#FDF2F6] text-[#121216] py-10 sm:py-14 lg:py-16 border-b border-[#EB1767]/15 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* =========================================================================
-            1. SECTION HEADER (Inspired by map style reference: Our Presence)
-            ========================================================================= */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 lg:mb-16">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-[#EB1767]/20 text-[#EB1767] text-xs font-semibold uppercase tracking-wider mb-3 shadow-2xs">
-              <Compass className="w-3.5 h-3.5" />
-              <span>Commercial Coordination Presence</span>
+        {/* Compact Section Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white border border-[#EB1767]/20 text-[#EB1767] text-[11px] font-semibold uppercase tracking-wider mb-2">
+              <Compass className="w-3 h-3" />
+              <span>Office Network</span>
             </div>
 
             <h2 
               id="locations-heading"
-              className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight leading-tight"
+              className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight"
             >
-              Karachi &amp; Multan Office Network.
+              Karachi &amp; Multan Coordination Offices.
             </h2>
 
-            <p className="mt-3 text-sm sm:text-base text-zinc-600 leading-relaxed font-['Inter',sans-serif]">
-              United Impex manages client consultations and order coordination through verified offices in Karachi and Multan.
+            <p className="mt-1.5 text-xs sm:text-sm text-zinc-600 font-['Inter',sans-serif]">
+              In-person client consultations &amp; order coordination by prior appointment.
             </p>
           </div>
 
-          <div className="text-left md:text-right">
-            <p className="text-xs font-bold uppercase tracking-wider text-zinc-400">Direct Inquiries</p>
-            <p className="text-base font-extrabold font-['Outfit',sans-serif] text-zinc-900 mt-0.5">
+          <div className="text-left sm:text-right">
+            <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">Commercial Inquiries</p>
+            <a 
+              href={CONTACT_INFO.phoneTel} 
+              className="text-sm sm:text-base font-extrabold font-['Outfit',sans-serif] text-[#EB1767] hover:underline"
+            >
               {CONTACT_INFO.phoneDisplay}
-            </p>
+            </a>
           </div>
         </div>
 
-        {/* =========================================================================
-            2. TWO VERIFIED OFFICE LOCATION CARDS
-            ========================================================================= */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Dual Verified Office Cards with Real City Photo Backgrounds */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           {OFFICE_LOCATIONS.map((office) => {
             const isKarachi = office.city === 'Karachi';
+            const cityBg = isKarachi ? '/cities/karachi-skyline.webp' : '/cities/multan-city.webp';
+            const photoCredit = isKarachi ? 'Wikimedia Commons (CC0)' : 'Wikimedia Commons (CC BY-SA 4.0)';
             const mapsQuery = isKarachi
               ? 'Office+1+Near+TDF+Magnifi+Science+Centre+Meher+Sons+Estate+Block+1+Talpur+Road+Karachi'
               : '45+Gulraiz+Colony+Street+3+Near+Allah+Shafi+Chowk+MDA+Road+Multan';
@@ -63,63 +64,73 @@ export const OfficeLocations: React.FC = () => {
             return (
               <div 
                 key={office.city}
-                className="group bg-white rounded-3xl p-6 sm:p-8 border border-[#EB1767]/20 shadow-xs hover:border-[#EB1767] hover:shadow-md transition-all duration-300 flex flex-col justify-between space-y-6"
+                className="group relative rounded-2xl overflow-hidden border border-zinc-700/60 shadow-md text-white min-h-[300px] sm:min-h-[340px] flex flex-col justify-between p-5 sm:p-6"
               >
-                {/* Header: Office City & Pill */}
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-2.5">
-                      <div className="p-2.5 rounded-xl bg-[#FDF2F6] text-[#EB1767]">
-                        <Building2 className="w-5 h-5" />
+                {/* Real City Background Image */}
+                <img
+                  src={cityBg}
+                  alt={`${office.city} city skyline`}
+                  className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                  loading="lazy"
+                />
+
+                {/* Dark Gradient Overlay for High Contrast Legibility */}
+                <div 
+                  className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/80 to-black/45 pointer-events-none"
+                  aria-hidden="true" 
+                />
+
+                {/* Card Content Top */}
+                <div className="relative z-10 space-y-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 rounded-xl bg-white/10 backdrop-blur-md text-[#EB1767] border border-white/10">
+                        <Building2 className="w-4 h-4" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold font-['Outfit',sans-serif] text-zinc-900">
+                        <h3 className="text-base sm:text-lg font-bold font-['Outfit',sans-serif] text-white">
                           {office.city} Office
                         </h3>
-                        <p className="text-xs font-semibold text-[#EB1767]">
-                          {isKarachi ? 'Southern Commercial Coordination' : 'Punjab Regional Operations'}
+                        <p className="text-[11px] text-[#EB1767] font-semibold">
+                          {isKarachi ? 'Southern Coordination' : 'Punjab Operations'}
                         </p>
                       </div>
                     </div>
 
-                    <span className="text-[11px] font-mono font-semibold px-2.5 py-1 rounded-full bg-zinc-100 text-zinc-600">
-                      Verified Location
+                    <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-white/10 text-zinc-300 border border-white/10">
+                      Verified
                     </span>
                   </div>
 
-                  {/* Address */}
-                  <div className="p-4 rounded-2xl bg-zinc-50 border border-zinc-200/60 space-y-2">
-                    <div className="flex items-start gap-2.5 text-xs text-zinc-700">
-                      <MapPin className="w-4 h-4 text-[#EB1767] shrink-0 mt-0.5" />
+                  {/* Verified Address */}
+                  <div className="p-3 rounded-xl bg-black/40 backdrop-blur-md border border-white/10 space-y-1">
+                    <div className="flex items-start gap-2 text-xs text-zinc-200">
+                      <MapPin className="w-3.5 h-3.5 text-[#EB1767] shrink-0 mt-0.5" />
                       <p className="leading-relaxed font-medium">
                         {office.address}
                       </p>
                     </div>
-
-                    <p className="text-[11px] text-zinc-500 italic pl-6.5">
-                      Scope: {office.note}
-                    </p>
                   </div>
 
-                  {/* Office Coordinates & Hours */}
-                  <div className="grid grid-cols-2 gap-3 text-xs">
-                    <div className="p-3 rounded-xl bg-white border border-zinc-100 space-y-0.5">
-                      <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider block">
-                        Consultation
+                  {/* Hours & Phone in Single Row */}
+                  <div className="grid grid-cols-2 gap-2 text-xs">
+                    <div className="p-2.5 rounded-xl bg-black/40 backdrop-blur-md border border-white/10">
+                      <span className="text-[9px] text-zinc-400 font-bold uppercase tracking-wider block">
+                        Visits
                       </span>
-                      <p className="font-semibold text-zinc-800 flex items-center gap-1.5">
-                        <Clock className="w-3 h-3 text-zinc-500" />
-                        <span>By Prior Appointment</span>
+                      <p className="text-[11px] font-medium text-white flex items-center gap-1 mt-0.5">
+                        <Clock className="w-3 h-3 text-[#EB1767]" />
+                        <span>By Appointment</span>
                       </p>
                     </div>
 
-                    <div className="p-3 rounded-xl bg-white border border-zinc-100 space-y-0.5">
-                      <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider block">
-                        Office Line
+                    <div className="p-2.5 rounded-xl bg-black/40 backdrop-blur-md border border-white/10">
+                      <span className="text-[9px] text-zinc-400 font-bold uppercase tracking-wider block">
+                        Phone
                       </span>
                       <a 
                         href={CONTACT_INFO.phoneTel}
-                        className="font-semibold text-[#EB1767] hover:underline flex items-center gap-1.5"
+                        className="text-[11px] font-bold text-[#EB1767] hover:underline flex items-center gap-1 mt-0.5"
                       >
                         <Phone className="w-3 h-3" />
                         <span>{office.phone || CONTACT_INFO.phoneDisplay}</span>
@@ -128,27 +139,28 @@ export const OfficeLocations: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Footer Action: Verified Google Maps Navigation */}
-                <div className="pt-4 border-t border-zinc-100 flex items-center justify-between">
-                  <span className="text-xs text-zinc-500">
-                    Client visits welcome by prior appointment
+                {/* Card Footer: Maps Directions + City Attribution Note */}
+                <div className="relative z-10 pt-3 border-t border-white/10 flex items-center justify-between text-xs mt-3">
+                  <span className="text-[10px] text-zinc-400">
+                    City view: {photoCredit}
                   </span>
 
                   <a
                     href={mapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-semibold shadow-2xs transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#EB1767] hover:bg-[#C90E54] text-white text-xs font-semibold shadow-xs transition-colors cursor-pointer"
                   >
-                    <Navigation className="w-3 h-3 text-[#EB1767]" />
-                    <span>Get Directions</span>
-                    <ExternalLink className="w-3 h-3" />
+                    <Navigation className="w-3 h-3" />
+                    <span>Directions</span>
+                    <ExternalLink className="w-2.5 h-2.5" />
                   </a>
                 </div>
               </div>
             );
           })}
         </div>
+
       </div>
     </section>
   );

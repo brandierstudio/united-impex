@@ -19,6 +19,7 @@ export interface CustomerReview {
   productTag: string;
   orderType: string;
   date: string;
+  avatarUrl?: string;
 }
 
 export interface VideoTestimonial {
@@ -50,11 +51,12 @@ export const DEMO_CUSTOMER_REVIEWS: CustomerReview[] = [
     businessType: 'Artisan Coffee Roasters',
     location: 'Lahore, Pakistan',
     rating: 5,
-    reviewTitle: 'Exceptional Print Registration & Heat Retention',
-    reviewText: 'We ordered custom 12oz double-wall paper cups for our three cafe locations. The vector logo reproduction was razor-sharp with no ink bleed, and the insulation kept beverages hot without requiring sleeves.',
+    reviewTitle: 'Sharp Vector Reproduction & Heat Retention',
+    reviewText: 'We ordered custom 12oz double-wall paper cups. Vector logo reproduction was razor-sharp with no bleed, and insulation kept beverages hot.',
     productTag: '12oz Double-Wall Cups',
     orderType: 'Commercial Beverage Print',
-    date: 'Demo Review'
+    date: 'Demo Review',
+    avatarUrl: '/reviews/avatar-1.webp'
   },
   {
     id: 'rev-2',
@@ -64,10 +66,11 @@ export const DEMO_CUSTOMER_REVIEWS: CustomerReview[] = [
     location: 'Karachi, Pakistan',
     rating: 5,
     reviewTitle: 'Rigid Presentation Boxes with Perfect Dielines',
-    reviewText: 'The folding packaging boxes for our retail leather accessories arrived precisely cut to our custom dieline specifications. The matte lamination gives a premium tactile touch that our customers notice.',
+    reviewText: 'The folding packaging boxes arrived precisely cut to our custom dieline specifications with a smooth, tactile matte lamination.',
     productTag: 'Custom Packaging Boxes',
     orderType: 'Retail Box Packaging',
-    date: 'Demo Review'
+    date: 'Demo Review',
+    avatarUrl: '/reviews/avatar-2.webp'
   },
   {
     id: 'rev-3',
@@ -77,10 +80,11 @@ export const DEMO_CUSTOMER_REVIEWS: CustomerReview[] = [
     location: 'Islamabad, Pakistan',
     rating: 5,
     reviewTitle: 'Sturdy Natural Kraft Bags with Rich Inks',
-    reviewText: 'Our twisted handle shopping bags required heavy-gauge kraft paper to handle packaged baked goods. United Impex matched our brand color accurately, and the handle joints are exceptionally durable.',
+    reviewText: 'Our twisted handle shopping bags handle packaged baked goods effortlessly. Brand colors match accurately and handle joints are durable.',
     productTag: 'Twisted Handle Kraft Bags',
     orderType: 'Eco Shopping Bags',
-    date: 'Demo Review'
+    date: 'Demo Review',
+    avatarUrl: '/reviews/avatar-3.webp'
   },
   {
     id: 'rev-4',
@@ -90,10 +94,11 @@ export const DEMO_CUSTOMER_REVIEWS: CustomerReview[] = [
     location: 'Multan, Pakistan',
     rating: 5,
     reviewTitle: 'Executive Hardbound Notebooks for Annual Summit',
-    reviewText: 'United Impex coordinated our annual corporate planners with gold foil debossing on navy leatherette. The paper smoothness and binding quality met our executive board’s highest expectations.',
+    reviewText: 'United Impex coordinated our annual corporate planners with gold foil debossing. Smooth paper and binding met our executive expectations.',
     productTag: 'Executive Corporate Diaries',
     orderType: 'Corporate Stationery',
-    date: 'Demo Review'
+    date: 'Demo Review',
+    avatarUrl: '/reviews/avatar-4.webp'
   }
 ];
 

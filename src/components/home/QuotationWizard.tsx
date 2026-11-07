@@ -120,7 +120,7 @@ export const QuotationWizard: React.FC<QuotationWizardProps> = ({ initialCategor
     <section 
       id="quote-wizard" 
       aria-labelledby="wizard-heading"
-      className="relative w-full bg-[#FDF2F6] text-[#121216] py-16 sm:py-20 lg:py-28 border-b border-[#EB1767]/15 overflow-hidden"
+      className="relative w-full bg-[#FDF2F6] text-[#121216] py-10 sm:py-14 lg:py-16 border-b border-[#EB1767]/15 overflow-hidden"
     >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         

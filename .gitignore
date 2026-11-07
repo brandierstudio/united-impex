@@ -33,3 +33,6 @@ dist-ssr
 
 # System
 Thumbs.db
+
+.vercel
+.env*

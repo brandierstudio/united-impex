@@ -8,7 +8,10 @@ import {
   Home,
   Info,
   Mail,
-  ShoppingBag
+  ShoppingBag,
+  Menu,
+  X,
+  FileText
 } from 'lucide-react';
 import logoSvg from '../../assets/logo/logo.svg';
 import { useCart } from '../../context/CartContext';
@@ -27,25 +30,25 @@ import {
  * - Pure white translucent liquid glass (bg-white/85 -> bg-white/92, backdrop-blur-md)
  * - Navigation links: Home, Products (accessible dropdown), About, Contact
  * - Right-side magenta CTA: "Request a Quote"
- * - Strictly untouched as per approved Milestone 2B specification
+ * - Strictly preserved as per approved Milestone 2B specification
  * 
- * Mobile (< 768px) Final Architecture:
- * - The WHITE mobile top navbar is in NORMAL DOCUMENT FLOW (position: relative), NOT sticky/fixed.
- * - Initial Page Load: Displays the full WHITE Liquid Glass mobile top navbar with official logo,
- *   helpline action, and accessible navigation options (Home, Products, About, Contact).
- * - On scroll down: The white navbar scrolls naturally out of the viewport with the page content.
- * - Once out of view: An IntersectionObserver triggers the appearance of the DARK #121216 bottom dock.
- * - On return to top: When the white top navbar re-enters view, the bottom dock hides.
- * - Zero simultaneous duplicates, zero flicker, zero layout shifts.
+ * Mobile (< 768px) Single-Row Header:
+ * - Combined into ONE compact header bar in natural document flow.
+ * - Left: Official vector logo.
+ * - Right: Single-row icon cluster (Phone icon-only, Products, Cart with badge, Menu toggle).
+ * - Accessible: Icon-only phone button triggers tel:+923714799755 without covering hero banner.
+ * - Menu drawer: Smooth collapsible drawer with full navigation when needed.
  */
 export const Navbar: React.FC = () => {
   const [location] = useLocation();
   const [productsOpen, setProductsOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { totalItemsCount } = useCart();
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const mobileDrawerRef = useRef<HTMLDivElement>(null);
 
   // Monitor scroll for subtle enhancement on desktop
   useEffect(() => {
@@ -56,7 +59,7 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close dropdown on click outside
+  // Close desktop dropdown on click outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -67,15 +70,27 @@ export const Navbar: React.FC = () => {
       ) {
         setProductsOpen(false);
       }
+      if (
+        mobileDrawerRef.current &&
+        !mobileDrawerRef.current.contains(event.target as Node)
+      ) {
+        // click outside drawer
+      }
     };
 
-    if (productsOpen) {
+    if (productsOpen || mobileMenuOpen) {
       document.addEventListener('mousedown', handleClickOutside);
     }
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [productsOpen]);
+  }, [productsOpen, mobileMenuOpen]);
 
-  // Handle keyboard navigation (Escape to close dropdown)
+  // Close mobile drawer on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setProductsOpen(false);
+  }, [location]);
+
+  // Handle keyboard navigation (Escape to close dropdown / drawer)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -83,11 +98,14 @@ export const Navbar: React.FC = () => {
           setProductsOpen(false);
           triggerRef.current?.focus();
         }
+        if (mobileMenuOpen) {
+          setMobileMenuOpen(false);
+        }
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [productsOpen]);
+  }, [productsOpen, mobileMenuOpen]);
 
   return (
     <div 
@@ -110,7 +128,7 @@ export const Navbar: React.FC = () => {
           {/* Desktop Left: Official Vector Logo */}
           <Link 
             href="/"
-            className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] focus-visible:ring-offset-2 rounded-lg transition-transform hover:opacity-90 active:scale-[0.98]"
+            className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] rounded-lg transition-transform hover:opacity-90 active:scale-95"
             aria-label={`${COMPANY_IDENTITY.name} — Home`}
           >
             <img 
@@ -122,81 +140,76 @@ export const Navbar: React.FC = () => {
 
           {/* Desktop Center: Navigation Links */}
           <nav 
-            role="navigation"
-            aria-label="Desktop Main Navigation"
-            className="flex items-center gap-1 lg:gap-2 text-sm font-medium font-['Outfit',sans-serif]"
+            role="navigation" 
+            aria-label="Main Navigation"
+            className="flex items-center gap-1 text-sm font-medium"
           >
             {MAIN_NAV_ITEMS.map((item) => {
-              const isActive = location === item.href || (item.href !== '/' && location.startsWith(item.href));
+              const isActive = location === item.href;
 
               if (item.hasDropdown) {
                 return (
-                  <div key={item.label} className="relative">
+                  <div key={item.label} className="relative" ref={dropdownRef}>
                     <button
                       ref={triggerRef}
                       type="button"
+                      onClick={() => setProductsOpen(!productsOpen)}
                       aria-expanded={productsOpen}
                       aria-haspopup="true"
-                      aria-controls="products-dropdown-menu"
-                      onClick={() => setProductsOpen((prev) => !prev)}
-                      onMouseEnter={() => setProductsOpen(true)}
-                      className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full transition-colors cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] focus-visible:ring-offset-1 ${
-                        isActive || productsOpen
+                      className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] focus-visible:ring-offset-1 ${
+                        isActive || location.startsWith('/products')
                           ? 'text-[#EB1767] font-semibold bg-pink-50/60'
                           : 'text-zinc-700 hover:text-[#EB1767] hover:bg-zinc-100/60'
                       }`}
                     >
                       <span>{item.label}</span>
                       <ChevronDown 
-                        className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                          productsOpen ? 'rotate-180 text-[#EB1767]' : 'text-zinc-400'
-                        }`} 
+                        className={`w-3.5 h-3.5 transition-transform duration-200 ${productsOpen ? 'rotate-180 text-[#EB1767]' : 'text-zinc-400'}`} 
                       />
                     </button>
 
-                    {/* Accessible Liquid Glass Dropdown Menu */}
+                    {/* Products Dropdown Panel */}
                     {productsOpen && (
-                      <div
-                        id="products-dropdown-menu"
-                        ref={dropdownRef}
+                      <div 
                         role="menu"
-                        aria-label="Product Categories"
-                        onMouseLeave={() => setProductsOpen(false)}
-                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 sm:w-80 bg-white/95 backdrop-blur-xl border border-zinc-200/80 rounded-2xl shadow-[0_16px_40px_rgba(0,0,0,0.08),0_4px_12px_rgba(0,0,0,0.04)] p-2 z-50 animate-in fade-in zoom-in-95 duration-150"
+                        aria-label="Product Categories Menu"
+                        className="absolute top-full left-0 mt-3 w-72 p-2 rounded-2xl glass-surface border border-zinc-200/80 shadow-[0_16px_40px_rgba(0,0,0,0.12)] animate-in fade-in slide-in-from-top-2 duration-150 z-50 pointer-events-auto"
                       >
-                        <div className="px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-zinc-400 border-b border-zinc-100 flex items-center justify-between">
-                          <span>Packaging Solutions</span>
-                          <Package className="w-3.5 h-3.5 text-[#EB1767]" />
+                        <div className="px-3 py-1.5 text-[11px] font-semibold tracking-wider text-zinc-600 uppercase font-mono">
+                          Product Categories
                         </div>
 
-                        <div className="py-1 space-y-0.5">
-                          {CORE_PRODUCT_CATEGORIES.map((cat) => (
+                        <div className="space-y-0.5 mt-1">
+                          {CORE_PRODUCT_CATEGORIES.map((category) => (
                             <Link
-                              key={cat.id}
-                              href={`/products/${cat.slug}`}
+                              key={category.id}
+                              href={`/products/${category.slug}`}
                               role="menuitem"
-                              onClick={() => setProductsOpen(false)}
-                              className="group flex items-start gap-3 p-2.5 rounded-xl hover:bg-pink-50/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
+                              className="flex items-center justify-between p-2.5 rounded-xl hover:bg-pink-50/80 transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
                             >
-                              <div className="w-2 h-2 rounded-full bg-zinc-300 group-hover:bg-[#EB1767] transition-colors mt-1.5 shrink-0" />
-                              <div className="flex-1">
-                                <p className="text-xs font-semibold text-zinc-800 group-hover:text-[#EB1767] transition-colors">
-                                  {cat.title}
-                                </p>
-                                <p className="text-[11px] text-zinc-500 line-clamp-1 leading-snug">
-                                  {cat.shortDesc}
-                                </p>
+                              <div className="flex items-center gap-2.5">
+                                <span className="p-1.5 rounded-lg bg-zinc-100 group-hover:bg-[#EB1767] text-zinc-600 group-hover:text-white transition-colors">
+                                  <Package className="w-3.5 h-3.5" />
+                                </span>
+                                <div>
+                                  <div className="text-xs font-semibold text-zinc-900 group-hover:text-[#EB1767]">
+                                    {category.title}
+                                  </div>
+                                  <div className="text-[10px] text-zinc-600">
+                                    {category.shortDesc}
+                                  </div>
+                                </div>
                               </div>
+                              <ArrowRight className="w-3.5 h-3.5 text-zinc-400 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all text-[#EB1767]" />
                             </Link>
                           ))}
                         </div>
 
-                        <div className="pt-1.5 mt-1 border-t border-zinc-100">
+                        <div className="mt-2 pt-2 border-t border-zinc-100 px-1">
                           <Link
                             href="/products"
                             role="menuitem"
-                            onClick={() => setProductsOpen(false)}
-                            className="flex items-center justify-between px-3 py-2 text-xs font-semibold text-[#EB1767] hover:bg-pink-50/70 rounded-xl transition-colors"
+                            className="flex items-center justify-between w-full p-2 rounded-xl text-xs font-semibold text-[#EB1767] hover:bg-pink-50/60 transition-colors"
                           >
                             <span>Browse All Products Catalog</span>
                             <ArrowRight className="w-3.5 h-3.5" />
@@ -248,137 +261,150 @@ export const Navbar: React.FC = () => {
           </div>
         </header>
 
-
         {/* ============================================================== */}
-        {/* 2. MOBILE TOP NAVBAR (< 768px) — Pure WHITE Liquid Glass      */}
-        {/* In normal document flow (NOT sticky/fixed). Scrolls with page. */}
+        {/* 2. MOBILE SINGLE-ROW HEADER (< 768px)                          */}
+        {/* Compact, clean, 1 row only. Zero clutter.                      */}
         {/* ============================================================== */}
         <header
           role="banner"
           aria-label="Mobile Header"
-          className="md:hidden pointer-events-auto mt-2.5 w-full glass-surface rounded-2xl p-2.5 transition-all"
+          className="md:hidden pointer-events-auto mt-2 w-full glass-surface rounded-2xl px-3 py-2 flex items-center justify-between shadow-xs transition-all border border-zinc-200/80"
         >
-          {/* Mobile Top Row: Logo + Cart + Helpline Action */}
-          <div className="flex items-center justify-between px-1.5 pb-2 border-b border-zinc-100">
-            <Link 
-              href="/"
-              className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] rounded-lg transition-transform hover:opacity-90 active:scale-95"
-              aria-label={`${COMPANY_IDENTITY.name} — Home`}
+          {/* Mobile Left: Official Vector Logo */}
+          <Link 
+            href="/"
+            className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] rounded-lg transition-transform hover:opacity-90 active:scale-95"
+            aria-label={`${COMPANY_IDENTITY.name} — Home`}
+          >
+            <img 
+              src={logoSvg} 
+              alt={COMPANY_IDENTITY.name} 
+              className="h-7 w-auto object-contain"
+            />
+          </Link>
+
+          {/* Mobile Right: Single-Row Icon Cluster */}
+          <div className="flex items-center gap-1 sm:gap-1.5">
+            {/* Call Action (Icon ONLY on mobile as per requirement) */}
+            <a
+              href={CONTACT_INFO.phoneTel}
+              aria-label={`Call United Impex: ${CONTACT_INFO.phoneDisplay}`}
+              className="p-2 rounded-xl bg-zinc-100/80 hover:bg-pink-50 text-zinc-700 hover:text-[#EB1767] active:scale-90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
             >
-              <img 
-                src={logoSvg} 
-                alt={COMPANY_IDENTITY.name} 
-                className="h-7 w-auto object-contain"
-              />
+              <Phone className="w-4 h-4 text-[#EB1767]" />
+            </a>
+
+            {/* Products Shortcut Icon */}
+            <Link
+              href="/products"
+              aria-label="All Products"
+              className="p-2 rounded-xl bg-zinc-100/80 hover:bg-pink-50 text-zinc-700 hover:text-[#EB1767] active:scale-90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
+            >
+              <Package className="w-4 h-4" />
             </Link>
 
-            {/* Quick Helpline Pill + Cart Icon */}
-            <div className="flex items-center gap-1.5">
-              <a
-                href={CONTACT_INFO.phoneTel}
-                aria-label={`Call United Impex: ${CONTACT_INFO.phoneDisplay}`}
-                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-zinc-100/80 hover:bg-pink-50 text-zinc-700 hover:text-[#EB1767] text-[11px] font-medium font-['Outfit',sans-serif] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
+            {/* Shopping Cart Icon with Badge */}
+            <Link
+              href="/cart"
+              aria-label={`Cart, ${totalItemsCount} items`}
+              className="relative p-2 rounded-xl bg-zinc-100/80 hover:bg-pink-50 text-zinc-700 hover:text-[#EB1767] active:scale-90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
+            >
+              <ShoppingBag className="w-4 h-4" />
+              {totalItemsCount > 0 && (
+                <span className="absolute -top-1 -right-1 min-w-[16px] h-4 px-0.5 rounded-full bg-[#EB1767] text-white text-[9px] font-bold flex items-center justify-center shadow-2xs">
+                  {totalItemsCount}
+                </span>
+              )}
+            </Link>
+
+            {/* Menu Toggle Drawer Button */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-expanded={mobileMenuOpen}
+              aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
+              className="p-2 rounded-xl bg-zinc-100/80 hover:bg-pink-50 text-zinc-700 hover:text-[#EB1767] active:scale-90 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
+            >
+              {mobileMenuOpen ? (
+                <X className="w-4 h-4 text-[#EB1767]" />
+              ) : (
+                <Menu className="w-4 h-4" />
+              )}
+            </button>
+          </div>
+        </header>
+
+        {/* Collapsible Mobile Menu Drawer */}
+        {mobileMenuOpen && (
+          <div 
+            ref={mobileDrawerRef}
+            className="md:hidden pointer-events-auto mt-2 w-full glass-surface rounded-2xl p-3 shadow-xl border border-zinc-200/90 animate-in fade-in slide-in-from-top-2 duration-200"
+          >
+            <nav aria-label="Mobile Drawer Navigation" className="space-y-1">
+              <Link
+                href="/"
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                  location === '/' ? 'bg-pink-50 text-[#EB1767]' : 'text-zinc-700 hover:bg-zinc-100'
+                }`}
               >
-                <Phone className="w-3 h-3 text-[#EB1767]" />
-                <span className="font-mono text-[10px]">{CONTACT_INFO.phoneDisplay}</span>
-              </a>
+                <Home className="w-4 h-4" />
+                <span>Home</span>
+              </Link>
 
               <Link
-                href="/cart"
-                aria-label={`Cart, ${totalItemsCount} items`}
-                className="relative p-1.5 rounded-full bg-zinc-100/80 hover:bg-pink-50 text-zinc-700 hover:text-[#EB1767] active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
+                href="/products"
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                  location.startsWith('/products') ? 'bg-pink-50 text-[#EB1767]' : 'text-zinc-700 hover:bg-zinc-100'
+                }`}
               >
-                <ShoppingBag className="w-4 h-4" />
-                {totalItemsCount > 0 && (
-                  <span className="absolute -top-1 -right-1 min-w-[16px] h-4 px-0.5 rounded-full bg-[#EB1767] text-white text-[9px] font-bold flex items-center justify-center">
-                    {totalItemsCount}
-                  </span>
-                )}
+                <Package className="w-4 h-4" />
+                <span>Products Catalog</span>
               </Link>
-            </div>
-          </div>
 
-          {/* Mobile Navigation Options (Full White Liquid Glass Navigation) */}
-          <nav
-            role="navigation"
-            aria-label="Mobile Navigation Menu"
-            className="pt-2 px-0.5"
-          >
-            <ul className="grid grid-cols-4 gap-1 items-center justify-items-stretch list-none p-0 m-0">
-              {/* 1. Home */}
-              <li className="w-full">
-                <Link
-                  href="/"
-                  aria-current={location === '/' ? 'page' : undefined}
-                  className={`flex flex-col items-center justify-center min-h-[44px] py-1 px-1 rounded-xl active:scale-95 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] group ${
-                    location === '/'
-                      ? 'text-[#EB1767] bg-pink-50/80 font-semibold'
-                      : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50 font-medium'
-                  }`}
-                >
-                  <Home className={`w-4 h-4 transition-transform duration-150 ${location === '/' ? 'scale-110 text-[#EB1767]' : 'text-zinc-500 group-hover:text-zinc-800'}`} />
-                  <span className={`text-[11px] font-['Outfit',sans-serif] mt-0.5 tracking-tight ${location === '/' ? 'text-[#EB1767] font-semibold' : 'text-zinc-600 group-hover:text-zinc-800'}`}>
-                    Home
-                  </span>
-                </Link>
-              </li>
+              <div className="pl-9 pr-2 py-1 space-y-1">
+                {CORE_PRODUCT_CATEGORIES.map((cat) => (
+                  <Link
+                    key={cat.id}
+                    href={`/products/${cat.slug}`}
+                    className="block text-xs font-medium text-zinc-600 hover:text-[#EB1767] py-1"
+                  >
+                    &bull; {cat.title}
+                  </Link>
+                ))}
+              </div>
 
-              {/* 2. Products */}
-              <li className="w-full">
-                <Link
-                  href="/products"
-                  aria-current={location.startsWith('/products') ? 'page' : undefined}
-                  className={`flex flex-col items-center justify-center min-h-[44px] py-1 px-1 rounded-xl active:scale-95 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] group ${
-                    location.startsWith('/products')
-                      ? 'text-[#EB1767] bg-pink-50/80 font-semibold'
-                      : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50 font-medium'
-                  }`}
-                >
-                  <Package className={`w-4 h-4 transition-transform duration-150 ${location.startsWith('/products') ? 'scale-110 text-[#EB1767]' : 'text-zinc-500 group-hover:text-zinc-800'}`} />
-                  <span className={`text-[11px] font-['Outfit',sans-serif] mt-0.5 tracking-tight ${location.startsWith('/products') ? 'text-[#EB1767] font-semibold' : 'text-zinc-600 group-hover:text-zinc-800'}`}>
-                    Products
-                  </span>
-                </Link>
-              </li>
+              <Link
+                href="/about"
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                  location === '/about' ? 'bg-pink-50 text-[#EB1767]' : 'text-zinc-700 hover:bg-zinc-100'
+                }`}
+              >
+                <Info className="w-4 h-4" />
+                <span>About United Impex</span>
+              </Link>
 
-              {/* 3. About */}
-              <li className="w-full">
-                <Link
-                  href="/about"
-                  aria-current={location === '/about' ? 'page' : undefined}
-                  className={`flex flex-col items-center justify-center min-h-[44px] py-1 px-1 rounded-xl active:scale-95 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] group ${
-                    location === '/about'
-                      ? 'text-[#EB1767] bg-pink-50/80 font-semibold'
-                      : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50 font-medium'
-                  }`}
-                >
-                  <Info className={`w-4 h-4 transition-transform duration-150 ${location === '/about' ? 'scale-110 text-[#EB1767]' : 'text-zinc-500 group-hover:text-zinc-800'}`} />
-                  <span className={`text-[11px] font-['Outfit',sans-serif] mt-0.5 tracking-tight ${location === '/about' ? 'text-[#EB1767] font-semibold' : 'text-zinc-600 group-hover:text-zinc-800'}`}>
-                    About
-                  </span>
-                </Link>
-              </li>
+              <Link
+                href="/contact"
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                  location === '/contact' ? 'bg-pink-50 text-[#EB1767]' : 'text-zinc-700 hover:bg-zinc-100'
+                }`}
+              >
+                <Mail className="w-4 h-4" />
+                <span>Contact &amp; Offices</span>
+              </Link>
 
-              {/* 4. Contact / Quote */}
-              <li className="w-full">
+              <div className="pt-2 mt-2 border-t border-zinc-100">
                 <Link
                   href="/quote"
-                  aria-current={location === '/quote' ? 'page' : undefined}
-                  className={`flex flex-col items-center justify-center min-h-[44px] py-1 px-1 rounded-xl active:scale-95 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] group ${
-                    location === '/quote'
-                      ? 'text-[#EB1767] bg-pink-50/80 font-semibold'
-                      : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50 font-medium'
-                  }`}
+                  className="btn-primary w-full text-xs font-semibold py-2.5 flex items-center justify-center gap-2"
                 >
-                  <Mail className={`w-4 h-4 transition-transform duration-150 ${location === '/quote' ? 'scale-110 text-[#EB1767]' : 'text-zinc-500 group-hover:text-zinc-800'}`} />
-                  <span className={`text-[11px] font-['Outfit',sans-serif] mt-0.5 tracking-tight ${location === '/quote' ? 'text-[#EB1767] font-semibold' : 'text-zinc-600 group-hover:text-zinc-800'}`}>
-                    Quote
-                  </span>
+                  <FileText className="w-4 h-4" />
+                  <span>Request a Custom Quote</span>
                 </Link>
-              </li>
-            </ul>
-          </nav>
-        </header>
+              </div>
+            </nav>
+          </div>
+        )}
 
       </div>
     </div>
