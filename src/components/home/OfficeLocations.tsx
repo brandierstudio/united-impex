@@ -22,24 +22,24 @@ export const OfficeLocations: React.FC = () => {
         {/* Compact Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white border border-[#EB1767]/20 text-[#EB1767] text-[11px] font-semibold uppercase tracking-wider mb-2">
+            <div className="reveal-subheading inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white border border-[#EB1767]/20 text-[#EB1767] text-[11px] font-semibold uppercase tracking-wider mb-2">
               <Compass className="w-3 h-3" />
               <span>Office Network</span>
             </div>
 
             <h2 
               id="locations-heading"
-              className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight"
+              className="reveal-heading text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight"
             >
               Karachi &amp; Multan Coordination Offices.
             </h2>
 
-            <p className="mt-1.5 text-xs sm:text-sm text-zinc-600 font-['Inter',sans-serif]">
+            <p className="reveal-subheading mt-1.5 text-xs sm:text-sm text-zinc-600 font-['Inter',sans-serif]">
               In-person client consultations &amp; order coordination by prior appointment.
             </p>
           </div>
 
-          <div className="text-left sm:text-right">
+          <div className="reveal-subheading text-left sm:text-right">
             <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">Commercial Inquiries</p>
             <a 
               href={CONTACT_INFO.phoneTel} 
@@ -51,7 +51,7 @@ export const OfficeLocations: React.FC = () => {
         </div>
 
         {/* Dual Verified Office Cards with Real City Photo Backgrounds */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        <div className="reveal-stagger-group grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           {OFFICE_LOCATIONS.map((office) => {
             const isKarachi = office.city === 'Karachi';
             const cityBg = isKarachi ? '/cities/karachi-skyline.webp' : '/cities/multan-city.webp';
@@ -64,7 +64,7 @@ export const OfficeLocations: React.FC = () => {
             return (
               <div 
                 key={office.city}
-                className="group relative rounded-2xl overflow-hidden border border-zinc-700/60 shadow-md text-white min-h-[300px] sm:min-h-[340px] flex flex-col justify-between p-5 sm:p-6"
+                className="reveal-card group relative rounded-2xl overflow-hidden border border-zinc-700/60 shadow-md text-white min-h-[300px] sm:min-h-[340px] flex flex-col justify-between p-5 sm:p-6"
               >
                 {/* Real City Background Image */}
                 <img

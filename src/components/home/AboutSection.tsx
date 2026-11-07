@@ -27,12 +27,12 @@ export const AboutSection: React.FC = () => {
         <div className="max-w-2xl mb-8 sm:mb-10">
           <h2 
             id="about-heading"
-            className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight leading-tight"
+            className="reveal-heading text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight leading-tight"
           >
             Commercial Printing &amp; Custom Packaging Partner.
           </h2>
 
-          <p className="mt-2 text-xs sm:text-sm text-zinc-600 leading-relaxed font-['Inter',sans-serif]">
+          <p className="reveal-subheading mt-2 text-xs sm:text-sm text-zinc-600 leading-relaxed font-['Inter',sans-serif]">
             United Impex operates as an offset printer, general order supplier, and packaging company with verified coordination offices in Karachi and Multan.
           </p>
         </div>

@@ -21,19 +21,19 @@ export const ContactSection: React.FC = () => {
             1. SECTION HEADER
             ========================================================================= */}
         <div className="max-w-3xl mb-12 lg:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EB1767]/15 border border-[#EB1767]/30 text-[#EB1767] text-xs font-semibold uppercase tracking-wider mb-3 shadow-2xs">
+          <div className="reveal-subheading inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EB1767]/15 border border-[#EB1767]/30 text-[#EB1767] text-xs font-semibold uppercase tracking-wider mb-3 shadow-2xs">
             <span className="w-1.5 h-1.5 rounded-full bg-[#EB1767]" aria-hidden="true" />
             <span>Direct Client Coordination</span>
           </div>
 
           <h2 
             id="contact-heading"
-            className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white font-['Outfit',sans-serif] tracking-tight leading-tight"
+            className="reveal-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white font-['Outfit',sans-serif] tracking-tight leading-tight"
           >
             Start Your Packaging Inquiry.
           </h2>
 
-          <p className="mt-3 text-sm sm:text-base text-zinc-400 leading-relaxed font-['Inter',sans-serif]">
+          <p className="reveal-subheading mt-3 text-sm sm:text-base text-zinc-400 leading-relaxed font-['Inter',sans-serif]">
             Connect directly with our leadership and commercial coordination desks for custom product sampling, dieline consultations, and itemized quotations.
           </p>
         </div>
@@ -41,14 +41,14 @@ export const ContactSection: React.FC = () => {
         {/* =========================================================================
             2. THREE DIRECT CONTACT CHANNELS
             ========================================================================= */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-12">
+        <div className="reveal-stagger-group grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-12">
           
           {/* Card 1: WhatsApp Coordination Desk */}
           <a
             href={CONTACT_INFO.whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="group p-6 sm:p-8 rounded-3xl bg-zinc-900/90 border border-zinc-800 shadow-md hover:border-[#EB1767] hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6"
+            className="reveal-card group p-6 sm:p-8 rounded-3xl bg-zinc-900/90 border border-zinc-800 shadow-md hover:border-[#EB1767] hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6"
           >
             <div className="space-y-4">
               <div className="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
@@ -82,7 +82,7 @@ export const ContactSection: React.FC = () => {
           {/* Card 2: Phone Helpline */}
           <a
             href={CONTACT_INFO.phoneTel}
-            className="group p-6 sm:p-8 rounded-3xl bg-zinc-900/90 border border-zinc-800 shadow-md hover:border-[#EB1767]/60 hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6"
+            className="reveal-card group p-6 sm:p-8 rounded-3xl bg-zinc-900/90 border border-zinc-800 shadow-md hover:border-[#EB1767]/60 hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6"
           >
             <div className="space-y-4">
               <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/15 text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
@@ -116,7 +116,7 @@ export const ContactSection: React.FC = () => {
           {/* Card 3: Email Inquiries */}
           <a
             href={CONTACT_INFO.emailMailto}
-            className="group p-6 sm:p-8 rounded-3xl bg-zinc-900/90 border border-zinc-800 shadow-md hover:border-[#EB1767]/60 hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6"
+            className="reveal-card group p-6 sm:p-8 rounded-3xl bg-zinc-900/90 border border-zinc-800 shadow-md hover:border-[#EB1767]/60 hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6"
           >
             <div className="space-y-4">
               <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/15 text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">

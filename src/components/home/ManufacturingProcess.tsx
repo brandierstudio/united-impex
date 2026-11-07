@@ -63,19 +63,19 @@ export const ManufacturingProcess: React.FC<ManufacturingProcessProps> = ({ onOp
         
         {/* Compact Section Header */}
         <div className="max-w-2xl mb-8 sm:mb-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/10 border border-white/20 text-[#EB1767] text-[11px] font-semibold uppercase tracking-wider mb-2">
+          <div className="reveal-subheading inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/10 border border-white/20 text-[#EB1767] text-[11px] font-semibold uppercase tracking-wider mb-2">
             <span className="w-1.5 h-1.5 rounded-full bg-[#EB1767]" aria-hidden="true" />
             <span>Workflow &amp; Production</span>
           </div>
 
           <h2 
             id="process-heading"
-            className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white font-['Outfit',sans-serif] tracking-tight"
+            className="reveal-heading text-xl sm:text-2xl lg:text-3xl font-extrabold text-white font-['Outfit',sans-serif] tracking-tight"
           >
             Commercial Printing &amp; Production Workflow.
           </h2>
 
-          <p className="mt-2 text-xs sm:text-sm text-zinc-400 leading-relaxed font-['Inter',sans-serif]">
+          <p className="reveal-subheading mt-2 text-xs sm:text-sm text-zinc-400 leading-relaxed font-['Inter',sans-serif]">
             A structured three-phase manufacturing process engineered for brand consistency across nationwide orders.
           </p>
         </div>
@@ -119,13 +119,13 @@ export const ManufacturingProcess: React.FC<ManufacturingProcessProps> = ({ onOp
           {/* RIGHT 8 COLS: 3 CONCISE PROCESS STEPS */}
           <div className="lg:col-span-8 flex flex-col justify-between gap-4">
             
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+            <div className="reveal-stagger-group grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
               {PROCESS_STAGES.map((stage: ProcessStage) => {
                 const imgSource = getImageSource(stage.imageId);
                 return (
                   <div 
                     key={stage.step}
-                    className="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 flex flex-col justify-between shadow-xs hover:border-zinc-700 transition-all"
+                    className="reveal-card p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 flex flex-col justify-between shadow-xs hover:border-zinc-700 transition-all"
                   >
                     <div>
                       <div className="flex items-center gap-2.5 mb-2.5">

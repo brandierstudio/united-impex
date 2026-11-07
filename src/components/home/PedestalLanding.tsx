@@ -26,19 +26,19 @@ export const PedestalLanding: React.FC<PedestalLandingProps> = ({ onOpenCustomiz
               LEFT 7 COLS: CALM, RESTRAINED EDITORIAL NARRATIVE
               =================================================================== */}
           <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EB1767]/15 border border-[#EB1767]/30 text-[#EB1767] text-xs font-semibold uppercase tracking-wider shadow-2xs">
+            <div className="reveal-subheading inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EB1767]/15 border border-[#EB1767]/30 text-[#EB1767] text-xs font-semibold uppercase tracking-wider shadow-2xs">
               <span className="w-1.5 h-1.5 rounded-full bg-[#EB1767]" aria-hidden="true" />
               <span>Signature Drinkware Presentation</span>
             </div>
 
             <h2
               id="landing-heading"
-              className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white font-['Outfit',sans-serif] tracking-tight leading-tight"
+              className="reveal-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white font-['Outfit',sans-serif] tracking-tight leading-tight"
             >
               The Single Cup. Restfully Placed.
             </h2>
 
-            <p className="text-sm sm:text-base text-zinc-400 leading-relaxed max-w-xl mx-auto lg:mx-0 font-['Inter',sans-serif]">
+            <p className="reveal-subheading text-sm sm:text-base text-zinc-400 leading-relaxed max-w-xl mx-auto lg:mx-0 font-['Inter',sans-serif]">
               Precision-formed virgin paperboard, leak-proof rim geometry, and vivid offset ink density. The continuous flight concludes here in a calm, dedicated resting space ready for your brand imprint.
             </p>
 

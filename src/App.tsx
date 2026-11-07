@@ -40,6 +40,7 @@ import { QuotePage } from './pages/QuotePage';
 import { ContactPage } from './pages/ContactPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { CartProvider } from './context/CartContext';
+import { useScrollReveal } from './hooks/useScrollReveal';
 import logoSvg from './assets/logo/logo.svg';
 import cupPng from './assets/animation/cup.png';
 import tableSceneJpg from './assets/animation/table-scene.jpg';
@@ -52,6 +53,9 @@ import {
 
 export default function App() {
   const [location] = useLocation();
+
+  // Coordinated Luxury Scroll Entrance System
+  useScrollReveal([location]);
 
   // Milestone 5B: Interactive Product Customizer Modal State
   const [isCustomizerOpen, setIsCustomizerOpen] = useState<boolean>(() => {

@@ -22,31 +22,31 @@ export const CustomerReviews: React.FC = () => {
         {/* Compact Section Header with Sample Disclaimer */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#EB1767]/15 border border-[#EB1767]/30 text-[#EB1767] text-[11px] font-semibold uppercase tracking-wider mb-2">
+            <div className="reveal-subheading inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#EB1767]/15 border border-[#EB1767]/30 text-[#EB1767] text-[11px] font-semibold uppercase tracking-wider mb-2">
               <MessageSquareQuote className="w-3 h-3 text-[#EB1767]" />
               <span>Customer Feedback</span>
             </div>
 
             <h2 
               id="reviews-heading"
-              className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white font-['Outfit',sans-serif] tracking-tight"
+              className="reveal-heading text-xl sm:text-2xl lg:text-3xl font-extrabold text-white font-['Outfit',sans-serif] tracking-tight"
             >
               Trusted for Packaging &amp; Print.
             </h2>
           </div>
 
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-zinc-800/80 border border-zinc-700/60 text-zinc-300 text-[11px] font-medium self-start sm:self-auto">
+          <div className="reveal-subheading inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-zinc-800/80 border border-zinc-700/60 text-zinc-300 text-[11px] font-medium self-start sm:self-auto">
             <Info className="w-3.5 h-3.5 text-[#EB1767] shrink-0" />
             <span>{SOCIAL_PROOF_DISCLOSURE.shortNotice}</span>
           </div>
         </div>
 
         {/* Compact Review Cards: Mobile 1.1-card carousel, Desktop 4-col grid */}
-        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0">
+        <div className="reveal-stagger-group flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0">
           {DEMO_CUSTOMER_REVIEWS.map((rev: CustomerReview) => (
             <article 
               key={rev.id}
-              className="group bg-zinc-900/85 rounded-xl p-4 sm:p-5 border border-zinc-800 hover:border-zinc-700 shadow-sm transition-all duration-300 flex flex-col justify-between space-y-3 w-[78vw] max-w-[280px] shrink-0 snap-center md:w-full"
+              className="reveal-card group bg-zinc-900/85 rounded-xl p-4 sm:p-5 border border-zinc-800 hover:border-zinc-700 shadow-sm transition-all duration-300 flex flex-col justify-between space-y-3 w-[78vw] max-w-[280px] shrink-0 snap-center md:w-full"
             >
               {/* Rating & Demo Chip */}
               <div className="space-y-2">

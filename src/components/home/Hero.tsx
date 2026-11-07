@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, MapPin, ArrowRight, Palette } from 'lucide-react';
 import { Link } from 'wouter';
+import gsap from 'gsap';
 import cupPng from '../../assets/animation/cup.png';
 import type { CustomizerCategory } from '../customizer/ProductCustomizerModal';
 
@@ -155,6 +156,29 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCustomizer }) => {
     setIsPaused(false);
   };
 
+  // Part 4: Subtle Coordinated Hero Text Reveal on Slide Change
+  useEffect(() => {
+    if (isReducedMotion) return;
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        '.hero-slide-title',
+        { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
+      );
+      gsap.fromTo(
+        '.hero-slide-desc',
+        { opacity: 0, y: 8 },
+        { opacity: 1, y: 0, duration: 0.4, delay: 0.08, ease: 'power2.out' }
+      );
+      gsap.fromTo(
+        '.hero-slide-cta',
+        { opacity: 0, y: 6 },
+        { opacity: 1, y: 0, duration: 0.4, delay: 0.14, ease: 'power2.out' }
+      );
+    });
+    return () => ctx.revert();
+  }, [currentSlideIndex, isReducedMotion]);
+
   return (
     <section
       id="hero"
@@ -221,16 +245,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCustomizer }) => {
                       <span className="text-[#121216]">{slide.kicker}</span>
                     </div>
 
-                    <h1 className="text-3xl xl:text-4xl 2xl:text-5xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight leading-[1.12]">
+                    <h1 className="hero-slide-title text-3xl xl:text-4xl 2xl:text-5xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight leading-[1.12]">
                       {slide.headlineMain} <br />
                       <span className="text-[#EB1767]">{slide.headlineHighlight}</span>
                     </h1>
 
-                    <p className="mt-3 text-sm xl:text-base text-zinc-600 leading-relaxed font-['Inter',sans-serif] max-w-md">
+                    <p className="hero-slide-desc mt-3 text-sm xl:text-base text-zinc-600 leading-relaxed font-['Inter',sans-serif] max-w-md">
                       {slide.subheadline}
                     </p>
 
-                    <div className="mt-6 flex items-center gap-3">
+                    <div className="hero-slide-cta mt-6 flex items-center gap-3">
                       <Link
                         href={slide.ctaRoute}
                         className="btn-primary text-xs tracking-wide px-6 py-3 flex items-center gap-2 group shadow-sm"
@@ -509,19 +533,19 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCustomizer }) => {
         </div>
 
         {/* ================================================================ */}
-        {/* MOBILE & TABLET UNIFIED FULL-BLEED HERO (< 1024px)               */}
-        {/* Single Cohesive Banner + Integrated Cup (NO redundant showcase)   */}
+        {/* MOBILE & TABLET UNIFIED ART-DIRECTED HERO (< 1024px)              */}
+        {/* High-Contrast Editorial Text + Pure Studio Product Stage + Cup    */}
         {/* ================================================================ */}
         <div className="block lg:hidden">
           <div 
-            className="relative w-full rounded-2xl overflow-hidden shadow-[0_12px_36px_-10px_rgba(0,0,0,0.08)] border border-zinc-200/80 bg-zinc-50"
+            className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_12px_40px_-12px_rgba(0,0,0,0.12)] border border-zinc-200/90 bg-[#FBF9F7]"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
             {/* Sliding Track with Mobile WebP Photos */}
             <div 
-              className={`flex w-full ${isReducedMotion ? '' : 'transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]'}`}
+              className={`flex w-full min-w-0 ${isReducedMotion ? '' : 'transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]'}`}
               style={{
                 transform: `translateX(-${currentSlideIndex * 100}%)`,
               }}
@@ -529,73 +553,80 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCustomizer }) => {
               {HERO_PHOTO_SLIDES.map((slide, sIdx) => (
                 <div
                   key={slide.id}
-                  className="w-full shrink-0 relative min-h-[380px] p-5 sm:p-7 flex flex-col justify-between overflow-hidden"
+                  className="w-full min-w-full max-w-full shrink-0 flex flex-col bg-[#FBF9F7] overflow-hidden"
                   aria-hidden={currentSlideIndex !== sIdx}
                 >
-                  {/* Real Mobile Photo Background */}
-                  <img
-                    src={slide.mobilePhoto}
-                    alt={slide.name}
-                    width={900}
-                    height={950}
-                    loading={sIdx === 0 ? 'eager' : 'lazy'}
-                    decoding="async"
-                    className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
-                  />
-
-                  {/* Soft Gradient Overlay for Text Readability */}
-                  <div 
-                    className="absolute inset-0 w-full h-full bg-gradient-to-t from-white/95 via-white/80 via-60% to-white/40 pointer-events-none"
-                    aria-hidden="true"
-                  />
-
-                  {/* Top Content: Kicker Badge + Large Headline */}
-                  <div className="relative z-10">
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/95 border border-black/10 text-[11px] font-bold uppercase tracking-wider font-mono shadow-2xs mb-2.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#EB1767]" />
-                      <span className="text-[#121216]">{slide.kicker}</span>
+                  {/* Top Content Zone: Pristine text background, 100% readable */}
+                  <div className="p-4 sm:p-6 pb-3 bg-gradient-to-b from-[#F7F4F2] via-[#FBF9F7] to-[#FBF9F7]">
+                    <div className="flex items-center justify-between gap-2 mb-2.5">
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white border border-black/10 text-[11px] font-bold uppercase tracking-wider font-mono shadow-2xs">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#EB1767]" />
+                        <span className="text-[#121216]">{slide.kicker}</span>
+                      </div>
+                      <div className="flex items-center gap-1 text-[11px] font-mono text-zinc-500 font-semibold">
+                        <MapPin className="w-3 h-3 text-[#EB1767]" />
+                        <span>Karachi &amp; Multan</span>
+                      </div>
                     </div>
 
-                    <h1 className="text-2xl sm:text-3xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight leading-[1.18]">
+                    <h1 className="hero-slide-title text-2xl sm:text-3xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight leading-[1.16] break-words">
                       {slide.headlineMain} <br />
                       <span className="text-[#EB1767]">{slide.headlineHighlight}</span>
                     </h1>
 
-                    <p className="mt-2 text-xs sm:text-sm text-zinc-700 leading-relaxed font-['Inter',sans-serif] max-w-xs">
+                    <p className="hero-slide-desc mt-1.5 text-xs sm:text-sm text-zinc-600 leading-relaxed font-['Inter',sans-serif] max-w-sm">
                       {slide.subheadline}
                     </p>
-                  </div>
 
-                  {/* Integrated Mobile Cup Anchor (Cleanly resting in banner, ready for GSAP scroll) */}
-                  <div className="relative z-10 flex items-center justify-between mt-2 pt-2">
-                    <div className="flex-1 max-w-[210px]">
+                    {/* CTAs */}
+                    <div className="hero-slide-cta mt-3 flex items-center gap-2.5">
                       <Link
                         href={slide.ctaRoute}
-                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-white font-bold text-xs shadow-md active:scale-95 transition-all min-h-[44px] bg-[#EB1767] w-full"
+                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-white font-bold text-xs shadow-sm active:scale-95 transition-all min-h-[42px] bg-[#EB1767] hover:bg-[#d01359]"
                         aria-label={slide.ctaLabel}
                       >
                         <span>Explore Collection</span>
                         <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
 
-                      <div className="mt-2 flex items-center gap-2 text-[10px] font-mono text-zinc-600 font-semibold">
-                        <MapPin className="w-3 h-3 text-[#EB1767]" />
-                        <span>Karachi &amp; Multan</span>
-                      </div>
+                      {onOpenCustomizer && (
+                        <button
+                          type="button"
+                          onClick={() => onOpenCustomizer('cups')}
+                          className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-full bg-white text-zinc-800 font-semibold text-xs border border-zinc-200/90 shadow-2xs active:scale-95 transition-all min-h-[42px] cursor-pointer"
+                        >
+                          <Palette className="w-3.5 h-3.5 text-[#EB1767]" />
+                          <span>2D Studio</span>
+                        </button>
+                      )}
                     </div>
+                  </div>
 
-                    {/* Mobile Starting Anchor for GSAP Scroll Journey */}
-                    <div className="relative w-28 h-28 sm:w-32 sm:h-32 shrink-0 flex items-center justify-center ml-2">
+                  {/* Dedicated Photographic Showcase Stage (100% Rich, Unobstructed Product Photography) */}
+                  <div className="relative w-full aspect-[16/11] sm:aspect-[16/9] bg-[#EFE7E4] overflow-hidden border-t border-zinc-200/50">
+                    <img
+                      src={slide.mobilePhoto}
+                      alt={slide.name}
+                      width={900}
+                      height={950}
+                      loading={sIdx === 0 ? 'eager' : 'lazy'}
+                      decoding="async"
+                      className="w-full h-full object-cover object-bottom select-none pointer-events-none"
+                    />
+
+                    {/* Integrated Mobile Coffee Cup Anchor (Resting naturally on the stage surface) */}
+                    <div className="absolute right-3.5 bottom-2 sm:right-6 sm:bottom-3 w-20 h-20 sm:w-24 sm:h-24 z-10 flex items-center justify-center pointer-events-none">
+                      {/* Realistic Ground Contact Shadow */}
                       <div 
-                        className="absolute bottom-1 left-1/2 -translate-x-1/2 w-20 h-2 bg-black/15 blur-sm rounded-full pointer-events-none" 
+                        className="absolute bottom-1 left-1/2 -translate-x-1/2 w-14 sm:w-16 h-2 bg-black/25 blur-[3px] rounded-full pointer-events-none" 
                         aria-hidden="true"
                       />
                       <img
-                        id="hero-scroll-cup-mobile"
+                        id={sIdx === currentSlideIndex ? 'hero-scroll-cup-mobile' : undefined}
                         src={cupPng}
                         alt="Custom printed disposable coffee cup by United Impex"
-                        width={240}
-                        height={240}
+                        width={200}
+                        height={200}
                         loading="eager"
                         fetchPriority="high"
                         className="w-full h-full object-contain select-none drop-shadow-md transform -rotate-3"
@@ -603,39 +634,44 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCustomizer }) => {
                     </div>
                   </div>
 
-                  {/* Bottom Navigation Dots */}
-                  <div className="relative z-10 mt-3 pt-2 border-t border-zinc-200/60 flex items-center justify-between">
+                  {/* Bottom Navigation Dots & Indicator Bar */}
+                  <div className="px-4 py-2.5 bg-[#FBF9F7] border-t border-zinc-200/70 flex items-center justify-between">
                     <div className="flex items-center gap-1.5">
-                      {HERO_PHOTO_SLIDES.map((_, sIdx) => (
+                      {HERO_PHOTO_SLIDES.map((_, dotIdx) => (
                         <button
-                          key={sIdx}
+                          key={dotIdx}
                           type="button"
-                          onClick={() => setCurrentSlideIndex(sIdx)}
+                          onClick={() => setCurrentSlideIndex(dotIdx)}
                           className={`h-1.5 rounded-full transition-all duration-300 ${
-                            currentSlideIndex === sIdx ? 'w-5 bg-[#121216]' : 'w-1.5 bg-zinc-400'
+                            currentSlideIndex === dotIdx ? 'w-5 bg-[#121216]' : 'w-1.5 bg-zinc-300'
                           }`}
-                          aria-label={`Slide ${sIdx + 1}`}
+                          aria-label={`Slide ${dotIdx + 1}`}
                         />
                       ))}
                     </div>
 
-                    <div className="flex items-center gap-1">
-                      <button
-                        type="button"
-                        onClick={handlePrev}
-                        className="w-7 h-7 rounded-full flex items-center justify-center bg-white/90 border border-zinc-200 text-zinc-700 active:scale-90"
-                        aria-label="Previous"
-                      >
-                        <ChevronLeft className="w-3.5 h-3.5" />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={handleNext}
-                        className="w-7 h-7 rounded-full flex items-center justify-center bg-white/90 border border-zinc-200 text-zinc-700 active:scale-90"
-                        aria-label="Next"
-                      >
-                        <ChevronRight className="w-3.5 h-3.5" />
-                      </button>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-mono font-bold text-zinc-500">
+                        0{currentSlideIndex + 1} / 0{HERO_PHOTO_SLIDES.length}
+                      </span>
+                      <div className="flex items-center gap-1">
+                        <button
+                          type="button"
+                          onClick={handlePrev}
+                          className="w-7 h-7 rounded-full flex items-center justify-center bg-white border border-zinc-200 text-zinc-700 shadow-2xs active:scale-90"
+                          aria-label="Previous"
+                        >
+                          <ChevronLeft className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={handleNext}
+                          className="w-7 h-7 rounded-full flex items-center justify-center bg-white border border-zinc-200 text-zinc-700 shadow-2xs active:scale-90"
+                          aria-label="Next"
+                        >
+                          <ChevronRight className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

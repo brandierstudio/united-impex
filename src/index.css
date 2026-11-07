@@ -387,6 +387,24 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* =========================================================================
+   ANNOUNCEMENT BAR SMOOTH ROLL ANIMATION
+   ========================================================================= */
+@keyframes announcement-roll {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-announcement-roll {
+  animation: announcement-roll 0.45s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
 .animate-hero-cup-sway {
   transform-origin: 50% 0px;
   animation: hero-cup-sway 6.8s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite;

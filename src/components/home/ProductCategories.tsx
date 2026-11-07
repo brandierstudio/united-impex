@@ -89,14 +89,14 @@ export const ProductCategories: React.FC<ProductCategoriesProps> = ({ onOpenCust
         {/* Section Header — Compact, Elegant */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-zinc-800/80 border border-zinc-700/60 text-[#EB1767] text-[11px] font-semibold uppercase tracking-wider mb-2">
+            <div className="reveal-subheading inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-zinc-800/80 border border-zinc-700/60 text-[#EB1767] text-[11px] font-semibold uppercase tracking-wider mb-2">
               <Package className="w-3 h-3 text-[#EB1767]" />
               <span>Commercial Packaging Portfolio</span>
             </div>
 
             <h2 
               id="categories-heading"
-              className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white font-['Outfit',sans-serif] tracking-tight"
+              className="reveal-heading text-xl sm:text-2xl lg:text-3xl font-extrabold text-white font-['Outfit',sans-serif] tracking-tight"
             >
               Featured Product Capabilities.
             </h2>
@@ -104,7 +104,7 @@ export const ProductCategories: React.FC<ProductCategoriesProps> = ({ onOpenCust
 
           <Link
             href="/products"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-400 hover:text-[#EB1767] transition-colors self-start sm:self-auto"
+            className="reveal-subheading inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-400 hover:text-[#EB1767] transition-colors self-start sm:self-auto"
           >
             <span>View All 8 Categories</span>
             <ArrowRight className="w-3.5 h-3.5 text-[#EB1767]" />
@@ -112,7 +112,7 @@ export const ProductCategories: React.FC<ProductCategoriesProps> = ({ onOpenCust
         </div>
 
         {/* Compact 4-Product Grid: Desktop 4×1, Mobile 2×2 */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+        <div className="reveal-stagger-group grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
           {FEATURE_PRODUCTS_CARDS(FEATURED_PRODUCTS, onOpenCustomizer)}
         </div>
 
@@ -133,7 +133,7 @@ function FEATURE_PRODUCTS_CARDS(
       <article
         key={item.id}
         id={isCup ? 'cup-anchor-1' : undefined}
-        className={`group flex flex-col bg-zinc-900/85 rounded-2xl overflow-hidden border border-zinc-800 hover:border-zinc-700 transition-all duration-300 shadow-md ${
+        className={`reveal-card group flex flex-col bg-zinc-900/85 rounded-2xl overflow-hidden border border-zinc-800 hover:border-zinc-700 transition-all duration-300 shadow-md ${
           isCup ? 'relative' : ''
         }`}
       >

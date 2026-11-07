@@ -82,8 +82,8 @@ export const AnnouncementBar: React.FC<AnnouncementBarProps> = ({ className = ''
     >
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-2 min-h-[36px] flex items-center justify-center">
         <div 
-          className={`text-center text-xs sm:text-[13px] leading-snug font-medium tracking-wide text-zinc-100 transition-opacity duration-300 ease-in-out ${
-            isReducedMotion ? '' : 'animate-in fade-in'
+          className={`text-center text-xs sm:text-[13px] leading-snug font-medium tracking-wide text-zinc-100 ${
+            isReducedMotion ? '' : 'animate-announcement-roll'
           }`}
           key={currentIndex}
         >

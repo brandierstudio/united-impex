@@ -111,14 +111,14 @@ export const PackagingComparison: React.FC<PackagingComparisonProps> = ({
         {/* Compact Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white border border-[#EB1767]/20 text-[#EB1767] text-[11px] font-semibold uppercase tracking-wider mb-2">
+            <div className="reveal-subheading inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white border border-[#EB1767]/20 text-[#EB1767] text-[11px] font-semibold uppercase tracking-wider mb-2">
               <span className="w-1.5 h-1.5 rounded-full bg-[#EB1767]" aria-hidden="true" />
               <span>Interactive Comparison</span>
             </div>
 
             <h2 
               id="comparison-heading"
-              className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight"
+              className="reveal-heading text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight"
             >
               See the Difference Custom Printing Makes.
             </h2>
@@ -158,7 +158,7 @@ export const PackagingComparison: React.FC<PackagingComparisonProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
           
           {/* Main Interactive Comparison Viewport (Centred Focus) */}
-          <div className="lg:col-span-9">
+          <div className="reveal-media lg:col-span-9">
             <div
               ref={containerRef}
               className="relative w-full aspect-[4/3] sm:aspect-[16/10] max-h-[500px] rounded-2xl bg-white border border-[#EB1767]/20 shadow-[0_8px_30px_-10px_rgba(235,23,103,0.1)] overflow-hidden cursor-ew-resize touch-none select-none"

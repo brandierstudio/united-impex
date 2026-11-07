@@ -128,19 +128,19 @@ export const QuotationWizard: React.FC<QuotationWizardProps> = ({ initialCategor
             1. SECTION HEADER
             ========================================================================= */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-[#EB1767]/20 text-[#EB1767] text-xs font-semibold uppercase tracking-wider mb-3 shadow-2xs">
+          <div className="reveal-subheading inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-[#EB1767]/20 text-[#EB1767] text-xs font-semibold uppercase tracking-wider mb-3 shadow-2xs">
             <Layers className="w-3.5 h-3.5" />
             <span>Interactive Multi-Step Estimator</span>
           </div>
 
           <h2 
             id="wizard-heading"
-            className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight leading-tight"
+            className="reveal-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#121216] font-['Outfit',sans-serif] tracking-tight leading-tight"
           >
             Request a Custom Packaging Quote.
           </h2>
 
-          <p className="mt-2.5 text-xs sm:text-sm text-zinc-600 leading-relaxed font-['Inter',sans-serif]">
+          <p className="reveal-subheading mt-2.5 text-xs sm:text-sm text-zinc-600 leading-relaxed font-['Inter',sans-serif]">
             Configure your packaging specifications in four quick steps. Get an itemized production quote directly from our coordination desk.
           </p>
         </div>
