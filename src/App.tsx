@@ -150,7 +150,7 @@ export default function App() {
         <Navbar introActive={introActive} />
 
         {/* Main Content Landmark */}
-        <main id="main-content" className="flex-1 w-full bg-white pb-24 md:pb-0">
+        <main id="main-content" className="flex-1 w-full bg-white pt-6 sm:pt-7 md:pt-0 pb-24 md:pb-0">
           {/* Direct Section Preview (Supports deterministic visual QA inspection) */}
           {previewSection === 'categories' && (
             <div className="pt-16 sm:pt-20">

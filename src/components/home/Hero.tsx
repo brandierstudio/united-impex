@@ -247,7 +247,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCustomizer }) => {
     <section
       id="hero"
       aria-label="United Impex Commercial Showcase"
-      className="relative w-full overflow-hidden pt-2 pb-6 sm:pb-10 lg:pb-14 transition-colors"
+      className="relative w-full overflow-hidden pt-0 pb-6 sm:pb-10 lg:pt-2 lg:pb-14 transition-colors"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocusCapture={() => setIsPaused(true)}
@@ -601,7 +601,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCustomizer }) => {
         {/* Faithful Implementation of Owner-Approved Mobile Reference        */}
         {/* Real 3-Slide Carousel: Real HTML Text, Real CTAs, Full Gestures    */}
         {/* ================================================================ */}
-        <div className="block lg:hidden w-full px-2 sm:px-3 -mt-14 sm:-mt-16 pt-0 pb-3">
+        <div id="mobile-hero-container" className="block lg:hidden w-full px-2 sm:px-3 pt-0 pb-3">
           <div 
             className="relative w-full rounded-[24px] sm:rounded-[28px] overflow-hidden shadow-[0_12px_36px_-8px_rgba(0,0,0,0.18)] bg-[#1a1816]"
             onTouchStart={handleTouchStart}
@@ -639,7 +639,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCustomizer }) => {
                   />
 
                   {/* Real Selectable HTML Headline and Functional CTA Button */}
-                  <div className="absolute top-12 sm:top-16 left-5 sm:left-7 z-20 max-w-[270px] sm:max-w-[320px] pointer-events-auto">
+                  <div className="absolute top-8 sm:top-10 left-5 sm:left-7 z-20 max-w-[270px] sm:max-w-[320px] pointer-events-auto">
                     <h1 className="text-2xl sm:text-3xl font-extrabold text-white font-['Outfit',sans-serif] tracking-tight leading-[1.15] drop-shadow-md">
                       {slide.headlineLine1} <br />
                       {slide.headlineLine2} <br />
@@ -654,7 +654,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCustomizer }) => {
                         className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white text-zinc-900 font-bold text-xs sm:text-sm shadow-lg hover:bg-zinc-100 active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
                         aria-label={`${slide.ctaLabel} — ${slide.name}`}
                       >
-                        <span>{slide.ctaLabel}</span>
+                        <span>{slide.id === "boxes" ? "Explore Collection" : slide.ctaLabel}</span>
                         <ArrowRight className="w-4 h-4 text-zinc-900" />
                       </Link>
                     </div>

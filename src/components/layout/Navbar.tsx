@@ -114,7 +114,7 @@ export const Navbar: React.FC<NavbarProps> = ({ introActive = false }) => {
   return (
     <div 
       id="mobile-top-navbar"
-      className="sticky top-2.5 md:top-3.5 z-40 w-full px-3 sm:px-6 pointer-events-none transition-all duration-300"
+      className="sticky top-2.5 md:top-3.5 z-40 w-full px-3 sm:px-6 pointer-events-none transition-all duration-300 pt-2.5 md:pt-0"
     >
       <div className="w-full max-w-[1080px] mx-auto">
         
