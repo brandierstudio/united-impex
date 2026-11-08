@@ -78,7 +78,7 @@ export const AnnouncementBar: React.FC<AnnouncementBarProps> = ({ className = ''
       onMouseLeave={() => setIsPaused(false)}
       onFocus={() => setIsPaused(true)}
       onBlur={() => setIsPaused(false)}
-      className={`w-full bg-[#121216] text-white border-b border-zinc-800/40 relative z-30 transition-colors select-none ${className}`}
+      className={`hidden md:block w-full bg-[#121216] text-white border-b border-zinc-800/40 relative z-30 transition-colors select-none ${className}`}
     >
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-2 min-h-[36px] flex items-center justify-center">
         <div 

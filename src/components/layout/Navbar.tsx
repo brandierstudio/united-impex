@@ -268,7 +268,11 @@ export const Navbar: React.FC = () => {
         <header
           role="banner"
           aria-label="Mobile Navigation Bar"
-          className="md:hidden pointer-events-auto w-full glass-surface rounded-full px-3.5 py-1.5 flex items-center justify-between shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all border border-zinc-200/80 bg-white/85 backdrop-blur-xl"
+          className={`md:hidden pointer-events-auto w-full rounded-full px-3.5 py-1.5 flex items-center justify-between shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-all duration-300 border ${
+            isScrolled
+              ? 'border-zinc-200/80 bg-white/92 backdrop-blur-xl'
+              : 'border-white/30 bg-white/20 backdrop-blur-xl'
+          }`}
         >
           {/* Mobile Left: Official Vector Logo */}
           <Link 
@@ -283,26 +287,34 @@ export const Navbar: React.FC = () => {
             />
           </Link>
 
-          {/* Mobile Right: Streamlined 3-Control Cluster (Call, Cart, Menu) */}
-          <div className="flex items-center gap-1">
-            {/* Call Action (Icon ONLY on mobile linking to verified tel) */}
+          {/* Mobile Right: 3-Control Translucent Circular Action Buttons */}
+          <div className="flex items-center gap-1.5">
+            {/* Call Action */}
             <a
               href={CONTACT_INFO.phoneTel}
               aria-label={`Call United Impex: ${CONTACT_INFO.phoneDisplay}`}
-              className="w-11 h-11 rounded-full flex items-center justify-center bg-zinc-100/80 hover:bg-pink-50 text-zinc-700 hover:text-[#EB1767] active:scale-90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
+              className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center active:scale-90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] ${
+                isScrolled
+                  ? 'bg-zinc-100/90 text-zinc-700 hover:text-[#EB1767]'
+                  : 'bg-white/25 border border-white/35 text-white backdrop-blur-md shadow-xs hover:bg-white/35'
+              }`}
             >
-              <Phone className="w-4 h-4 text-[#EB1767]" />
+              <Phone className="w-4 h-4" />
             </a>
 
             {/* Shopping Cart Icon with Badge */}
             <Link
               href="/cart"
               aria-label={`Cart, ${totalItemsCount} items`}
-              className="relative w-11 h-11 rounded-full flex items-center justify-center bg-zinc-100/80 hover:bg-pink-50 text-zinc-700 hover:text-[#EB1767] active:scale-90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
+              className={`relative w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center active:scale-90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] ${
+                isScrolled
+                  ? 'bg-zinc-100/90 text-zinc-700 hover:text-[#EB1767]'
+                  : 'bg-white/25 border border-white/35 text-white backdrop-blur-md shadow-xs hover:bg-white/35'
+              }`}
             >
               <ShoppingBag className="w-4 h-4" />
               {totalItemsCount > 0 && (
-                <span className="absolute top-1.5 right-1.5 min-w-[16px] h-4 px-0.5 rounded-full bg-[#EB1767] text-white text-[9px] font-bold flex items-center justify-center shadow-2xs">
+                <span className="absolute -top-0.5 -right-0.5 min-w-[16px] h-4 px-0.5 rounded-full bg-[#EB1767] text-white text-[9px] font-bold flex items-center justify-center shadow-xs">
                   {totalItemsCount}
                 </span>
               )}
@@ -314,7 +326,11 @@ export const Navbar: React.FC = () => {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-expanded={mobileMenuOpen}
               aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
-              className="w-11 h-11 rounded-full flex items-center justify-center bg-zinc-100/80 hover:bg-pink-50 text-zinc-700 hover:text-[#EB1767] active:scale-90 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
+              className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center active:scale-90 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] ${
+                isScrolled
+                  ? 'bg-zinc-100/90 text-zinc-700 hover:text-[#EB1767]'
+                  : 'bg-white/25 border border-white/35 text-white backdrop-blur-md shadow-xs hover:bg-white/35'
+              }`}
             >
               {mobileMenuOpen ? (
                 <X className="w-4 h-4 text-[#EB1767]" />

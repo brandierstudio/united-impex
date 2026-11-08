@@ -79,12 +79,128 @@ export interface ProductCategoriesProps {
 
 export const ProductCategories: React.FC<ProductCategoriesProps> = ({ onOpenCustomizer }) => {
   return (
-    <section 
-      id="products" 
-      aria-labelledby="categories-heading"
-      className="relative w-full bg-[#121216] text-white py-10 sm:py-14 lg:py-16 border-b border-zinc-800 scroll-mt-20 overflow-hidden"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <>
+      {/* ========================================================================= */}
+      {/* APPROVED MOBILE EXPERIENCE (< 1024px)                                     */}
+      {/* Faithful implementation of Owner-Approved Mobile Visual Reference         */}
+      {/* ========================================================================= */}
+      <section 
+        id="mobile-categories-strip" 
+        aria-label="Product Categories"
+        className="block lg:hidden w-full bg-[#FAF8F5] px-3 sm:px-4 pt-3 pb-5"
+      >
+        {/* 1. Four Category Tiles: Single Row, 4 Columns */}
+        <div className="grid grid-cols-4 gap-2 sm:gap-3">
+          {/* Tile 1: Coffee Cups */}
+          <Link 
+            href="/products/coffee-cups"
+            className="group flex flex-col items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] rounded-2xl"
+          >
+            <div className="w-full aspect-square rounded-[18px] sm:rounded-[22px] overflow-hidden bg-[#F5EFEA] border border-zinc-200/60 p-1.5 sm:p-2 shadow-2xs group-hover:scale-[1.03] active:scale-95 transition-all">
+              <img
+                src="/mobile-ref/cat-coffee-cups.webp"
+                alt="Custom Coffee Cups"
+                width={240}
+                height={240}
+                loading="lazy"
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <span className="mt-1.5 text-[11px] sm:text-xs font-semibold text-zinc-800 text-center tracking-tight leading-tight group-hover:text-[#EB1767] transition-colors">
+              Coffee Cups
+            </span>
+          </Link>
+
+          {/* Tile 2: Cartons */}
+          <Link 
+            href="/products/boxes"
+            className="group flex flex-col items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] rounded-2xl"
+          >
+            <div className="w-full aspect-square rounded-[18px] sm:rounded-[22px] overflow-hidden bg-[#F5EFEA] border border-zinc-200/60 p-1.5 sm:p-2 shadow-2xs group-hover:scale-[1.03] active:scale-95 transition-all">
+              <img
+                src="/mobile-ref/cat-cartons.webp"
+                alt="Custom Packaging Cartons"
+                width={240}
+                height={240}
+                loading="lazy"
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <span className="mt-1.5 text-[11px] sm:text-xs font-semibold text-zinc-800 text-center tracking-tight leading-tight group-hover:text-[#EB1767] transition-colors">
+              Cartons
+            </span>
+          </Link>
+
+          {/* Tile 3: Paper Bags */}
+          <Link 
+            href="/products/paper-bags"
+            className="group flex flex-col items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] rounded-2xl"
+          >
+            <div className="w-full aspect-square rounded-[18px] sm:rounded-[22px] overflow-hidden bg-[#F5EFEA] border border-zinc-200/60 p-1.5 sm:p-2 shadow-2xs group-hover:scale-[1.03] active:scale-95 transition-all">
+              <img
+                src="/mobile-ref/cat-paper-bags.webp"
+                alt="Custom Paper Bags"
+                width={240}
+                height={240}
+                loading="lazy"
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <span className="mt-1.5 text-[11px] sm:text-xs font-semibold text-zinc-800 text-center tracking-tight leading-tight group-hover:text-[#EB1767] transition-colors">
+              Paper Bags
+            </span>
+          </Link>
+
+          {/* Tile 4: Diaries */}
+          <Link 
+            href="/products/diaries"
+            className="group flex flex-col items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] rounded-2xl"
+          >
+            <div className="w-full aspect-square rounded-[18px] sm:rounded-[22px] overflow-hidden bg-[#F5EFEA] border border-zinc-200/60 p-1.5 sm:p-2 shadow-2xs group-hover:scale-[1.03] active:scale-95 transition-all">
+              <img
+                src="/mobile-ref/cat-diaries.webp"
+                alt="Custom Corporate Diaries"
+                width={240}
+                height={240}
+                loading="lazy"
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <span className="mt-1.5 text-[11px] sm:text-xs font-semibold text-zinc-800 text-center tracking-tight leading-tight group-hover:text-[#EB1767] transition-colors">
+              Diaries
+            </span>
+          </Link>
+        </div>
+
+        {/* 2. Feature Banner: "Premium Custom Boxes" with Circular Arrow Button */}
+        <Link
+          href="/products/boxes"
+          className="group relative block mt-3.5 rounded-[22px] sm:rounded-[26px] overflow-hidden shadow-sm border border-zinc-200/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] active:scale-[0.99] transition-all"
+          aria-label="Explore Premium Custom Boxes Collection"
+        >
+          <div className="relative aspect-[524/152] w-full overflow-hidden bg-[#453632]">
+            <img
+              src="/mobile-ref/feature-banner-boxes.webp"
+              alt="Premium Custom Boxes — Luxury rigid cartons with debossed metallic branding"
+              width={1048}
+              height={304}
+              loading="lazy"
+              className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500"
+            />
+          </div>
+        </Link>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* DESKTOP EXPERIENCE (>= 1024px)                                            */}
+      {/* Preserved Milestone 3 / GSAP Cup Landing Anchor Grid                      */}
+      {/* ========================================================================= */}
+      <section 
+        id="products" 
+        aria-labelledby="categories-heading"
+        className="hidden lg:block relative w-full bg-[#121216] text-white py-10 sm:py-14 lg:py-16 border-b border-zinc-800 scroll-mt-20 overflow-hidden"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header — Compact, Elegant */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10">
@@ -118,6 +234,7 @@ export const ProductCategories: React.FC<ProductCategoriesProps> = ({ onOpenCust
 
       </div>
     </section>
+    </>
   );
 };
 
