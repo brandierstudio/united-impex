@@ -69,18 +69,46 @@ export const PackagingComparison: React.FC<PackagingComparisonProps> = ({
     }
   };
 
+  const touchStartXRef = useRef<number>(0);
+  const touchStartYRef = useRef<number>(0);
+  const touchIntentRef = useRef<'horizontal' | 'vertical' | null>(null);
+
   const handleTouchStart = (e: React.TouchEvent) => {
-    setIsDragging(true);
-    handleMove(e.touches[0].clientX);
+    touchStartXRef.current = e.touches[0].clientX;
+    touchStartYRef.current = e.touches[0].clientY;
+    touchIntentRef.current = null;
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging) return;
-    handleMove(e.touches[0].clientX);
+    if (touchIntentRef.current === 'vertical') {
+      // Natural vertical page scrolling, do not capture
+      return;
+    }
+
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    const deltaX = Math.abs(currentX - touchStartXRef.current);
+    const deltaY = Math.abs(currentY - touchStartYRef.current);
+
+    if (touchIntentRef.current === null) {
+      if (deltaY > 7 && deltaY > deltaX) {
+        touchIntentRef.current = 'vertical';
+        setIsDragging(false);
+        return;
+      } else if (deltaX > 7 && deltaX > deltaY) {
+        touchIntentRef.current = 'horizontal';
+        setIsDragging(true);
+      }
+    }
+
+    if (touchIntentRef.current === 'horizontal') {
+      handleMove(currentX);
+    }
   };
 
   const handleTouchEnd = () => {
     setIsDragging(false);
+    touchIntentRef.current = null;
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -161,7 +189,7 @@ export const PackagingComparison: React.FC<PackagingComparisonProps> = ({
           <div className="reveal-media col-span-12 lg:col-span-9">
             <div
               ref={containerRef}
-              className="relative w-full aspect-[4/3] sm:aspect-[16/10] max-h-[500px] rounded-2xl bg-white border border-[#EB1767]/20 shadow-[0_8px_30px_-10px_rgba(235,23,103,0.1)] overflow-hidden cursor-ew-resize touch-none select-none"
+              className="relative w-full aspect-[4/3] sm:aspect-[16/10] max-h-[500px] rounded-2xl bg-[#D6D6D6] border border-[#EB1767]/20 shadow-[0_8px_30px_-10px_rgba(235,23,103,0.1)] overflow-hidden cursor-ew-resize touch-pan-y select-none"
               onPointerDown={handlePointerDown}
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}
@@ -183,7 +211,7 @@ export const PackagingComparison: React.FC<PackagingComparisonProps> = ({
                   alt={`${productName} — After custom printing`}
                   width={1200}
                   height={900}
-                  className="w-full h-full object-contain pointer-events-none"
+                  className="w-full h-full object-cover object-center pointer-events-none"
                   loading="lazy"
                   decoding="async"
                 />
@@ -207,7 +235,7 @@ export const PackagingComparison: React.FC<PackagingComparisonProps> = ({
                   alt={`${productName} — Before branding`}
                   width={1200}
                   height={900}
-                  className="w-full h-full object-contain pointer-events-none bg-white"
+                  className="w-full h-full object-cover object-center pointer-events-none bg-[#D6D6D6]"
                   loading="lazy"
                   decoding="async"
                 />

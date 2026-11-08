@@ -10,6 +10,10 @@ export interface MobileNavItem {
   icon: React.ElementType;
 }
 
+export interface MobileBottomNavProps {
+  isHidden?: boolean;
+}
+
 /**
  * MobileBottomNav Component
  * 
@@ -22,7 +26,7 @@ export interface MobileNavItem {
  * 3. Shopping Bag (with live cart count badge) -> /cart
  * 4. Profile / Contact -> /contact
  */
-export const MobileBottomNav: React.FC = () => {
+export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({ isHidden = false }) => {
   const [location] = useLocation();
   const { totalItemsCount } = useCart();
 
@@ -55,13 +59,18 @@ export const MobileBottomNav: React.FC = () => {
 
   return (
     <div 
-      className="md:hidden fixed bottom-3 sm:bottom-4 inset-x-0 z-50 px-4 pointer-events-none transition-all duration-300"
+      aria-hidden={isHidden}
+      className={`md:hidden fixed bottom-3 sm:bottom-4 inset-x-0 z-40 px-4 pointer-events-none transition-all duration-300 ${
+        isHidden 
+          ? 'translate-y-32 opacity-0' 
+          : 'translate-y-0 opacity-100'
+      }`}
       style={{ paddingBottom: 'max(0px, env(safe-area-inset-bottom))' }}
     >
       <nav
         role="navigation"
         aria-label="Mobile Navigation Dock"
-        className="max-w-[320px] sm:max-w-[340px] w-full mx-auto pointer-events-auto rounded-full bg-white/75 dark:bg-zinc-900/75 backdrop-blur-xl border border-white/60 shadow-[0_12px_36px_-6px_rgba(0,0,0,0.18)] px-3 py-1.5 flex items-center justify-between"
+        className="max-w-[320px] sm:max-w-[340px] w-full mx-auto pointer-events-auto rounded-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border border-white/60 shadow-[0_12px_36px_-6px_rgba(0,0,0,0.18)] px-3 py-1.5 flex items-center justify-between"
       >
         {navItems.map((item) => {
           const Icon = item.icon;

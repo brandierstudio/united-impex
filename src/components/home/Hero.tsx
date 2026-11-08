@@ -85,6 +85,54 @@ export const HERO_PHOTO_SLIDES: HeroPhotoSlideData[] = [
   },
 ];
 
+export interface MobileHeroSlide {
+  id: string;
+  name: string;
+  photo: string;
+  alt: string;
+  headlineLine1: string;
+  headlineLine2: string;
+  headlineHighlight: string;
+  ctaLabel: string;
+  ctaRoute: string;
+}
+
+export const MOBILE_HERO_SLIDES: MobileHeroSlide[] = [
+  {
+    id: 'boxes',
+    name: 'Custom Packaging Boxes',
+    photo: '/mobile-ref/slide-boxes-mobile.webp',
+    alt: 'Custom Packaging Boxes and Branded Retail Bags by United Impex',
+    headlineLine1: 'Custom',
+    headlineLine2: 'Packaging for',
+    headlineHighlight: 'Your Brand',
+    ctaLabel: 'Explore Boxes',
+    ctaRoute: '/products/boxes',
+  },
+  {
+    id: 'cups',
+    name: 'Custom Coffee Cups',
+    photo: '/mobile-ref/slide-cups-mobile.webp',
+    alt: 'Commercial Takeaway Insulated Coffee Cups by United Impex',
+    headlineLine1: 'Make Every',
+    headlineLine2: 'Sip',
+    headlineHighlight: 'Memorable',
+    ctaLabel: 'Explore Coffee Cups',
+    ctaRoute: '/products/coffee-cups',
+  },
+  {
+    id: 'diaries',
+    name: 'Corporate Diaries',
+    photo: '/mobile-ref/slide-diaries-mobile.webp',
+    alt: 'Executive Corporate Diaries and Custom Debossed Planners by United Impex',
+    headlineLine1: 'Every Detail',
+    headlineLine2: 'Matters in',
+    headlineHighlight: 'Print & Finish',
+    ctaLabel: 'Explore Diaries',
+    ctaRoute: '/products/diaries',
+  },
+];
+
 export interface HeroProps {
   onOpenCustomizer?: (category?: CustomizerCategory) => void;
 }
@@ -551,6 +599,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCustomizer }) => {
         {/* ================================================================ */}
         {/* MOBILE & TABLET EDITORIAL LUXURY HERO (< 1024px)                  */}
         {/* Faithful Implementation of Owner-Approved Mobile Reference        */}
+        {/* Real 3-Slide Carousel: Real HTML Text, Real CTAs, Full Gestures    */}
         {/* ================================================================ */}
         <div className="block lg:hidden w-full px-2 sm:px-3 -mt-14 sm:-mt-16 pt-0 pb-3">
           <div 
@@ -559,48 +608,80 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCustomizer }) => {
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
-            {/* Visual Surface matching Approved Reference */}
-            <div className="relative w-full aspect-[576/528] overflow-hidden select-none">
-              <img
-                src="/mobile-ref/hero-clean-top.webp"
-                alt="Custom Packaging for Your Brand — United Impex"
-                width={1152}
-                height={1056}
-                loading="eager"
-                fetchPriority="high"
-                decoding="async"
-                className="w-full h-full object-cover object-center pointer-events-none select-none"
-              />
+            {/* Sliding Track with 3 Distinct Packaging Slides */}
+            <div 
+              className={`flex w-full ${isReducedMotion ? '' : 'transition-transform duration-500 ease-out'}`}
+              style={{
+                transform: `translateX(-${currentSlideIndex * 100}%)`,
+              }}
+            >
+              {MOBILE_HERO_SLIDES.map((slide, sIdx) => (
+                <div
+                  key={slide.id}
+                  className="w-full min-w-full max-w-full shrink-0 relative aspect-[576/528] overflow-hidden select-none"
+                  aria-hidden={currentSlideIndex !== sIdx}
+                >
+                  <img
+                    src={slide.photo}
+                    alt={slide.alt}
+                    width={1152}
+                    height={1056}
+                    loading={sIdx === 0 ? "eager" : "lazy"}
+                    fetchPriority={sIdx === 0 ? "high" : "auto"}
+                    decoding="async"
+                    className="w-full h-full object-cover object-center pointer-events-none select-none"
+                  />
 
-              {/* Accessible Semantic Heading for SEO and Screen Readers */}
-              <h1 className="sr-only">
-                Custom Packaging for Your Brand — United Impex Commercial Packaging & Printing
-              </h1>
+                  {/* Left Readable Studio Shadow Gradient Overlay */}
+                  <div 
+                    className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/35 to-transparent pointer-events-none" 
+                    aria-hidden="true" 
+                  />
 
-              {/* Interactive Hit-Target for 'Explore Collection' Button */}
-              <Link
-                href="/products"
-                aria-label="Explore Collection — Browse custom packaging boxes, bags, drinkware, and stationery"
-                className="absolute left-[7.6%] top-[54.5%] w-[35.6%] h-[7.2%] rounded-full z-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] focus-visible:ring-offset-2 active:scale-95 transition-transform"
-              />
+                  {/* Real Selectable HTML Headline and Functional CTA Button */}
+                  <div className="absolute top-12 sm:top-16 left-5 sm:left-7 z-20 max-w-[270px] sm:max-w-[320px] pointer-events-auto">
+                    <h1 className="text-2xl sm:text-3xl font-extrabold text-white font-['Outfit',sans-serif] tracking-tight leading-[1.15] drop-shadow-md">
+                      {slide.headlineLine1} <br />
+                      {slide.headlineLine2} <br />
+                      {slide.headlineHighlight && (
+                        <span className="text-[#EB1767] drop-shadow-sm">{slide.headlineHighlight}</span>
+                      )}
+                    </h1>
 
-              {/* Minimal Slide Indicators matching Reference */}
-              <div className="absolute bottom-[3.5%] inset-x-0 flex items-center justify-center gap-1.5 z-20 pointer-events-auto">
-                <span 
-                  aria-current="true"
-                  className="w-5 h-1.5 rounded-full bg-white transition-all shadow-xs" 
+                    <div className="mt-4">
+                      <Link
+                        href={slide.ctaRoute}
+                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white text-zinc-900 font-bold text-xs sm:text-sm shadow-lg hover:bg-zinc-100 active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
+                        aria-label={`${slide.ctaLabel} — ${slide.name}`}
+                      >
+                        <span>{slide.ctaLabel}</span>
+                        <ArrowRight className="w-4 h-4 text-zinc-900" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Interactive Carousel Pagination Indicators */}
+            <div className="absolute bottom-3.5 inset-x-0 flex items-center justify-center gap-1.5 z-20 pointer-events-auto">
+              {MOBILE_HERO_SLIDES.map((slide, dotIdx) => (
+                <button
+                  key={slide.id}
+                  type="button"
+                  onClick={() => {
+                    setCurrentSlideIndex(dotIdx);
+                    setIsPaused(true);
+                    setTimeout(() => setIsPaused(false), 6000);
+                  }}
+                  aria-label={`Slide ${dotIdx + 1}: ${slide.name}${currentSlideIndex === dotIdx ? ' (Current)' : ''}`}
+                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer shadow-xs ${
+                    currentSlideIndex === dotIdx 
+                      ? 'w-6 bg-white' 
+                      : 'w-1.5 bg-white/40 hover:bg-white/80'
+                  }`}
                 />
-                <Link
-                  href="/products/paper-bags"
-                  aria-label="View Paper Bags Collection"
-                  className="w-1.5 h-1.5 rounded-full bg-white/40 hover:bg-white/80 transition-all cursor-pointer"
-                />
-                <Link
-                  href="/products/diaries"
-                  aria-label="View Corporate Diaries Collection"
-                  className="w-1.5 h-1.5 rounded-full bg-white/40 hover:bg-white/80 transition-all cursor-pointer"
-                />
-              </div>
+              ))}
             </div>
           </div>
         </div>

@@ -147,10 +147,10 @@ export default function App() {
         <AnnouncementBar />
 
         {/* Milestone 2B: Liquid Glass Desktop Navbar */}
-        <Navbar />
+        <Navbar introActive={introActive} />
 
         {/* Main Content Landmark */}
-        <main id="main-content" className="flex-1 w-full bg-white">
+        <main id="main-content" className="flex-1 w-full bg-white pb-24 md:pb-0">
           {/* Direct Section Preview (Supports deterministic visual QA inspection) */}
           {previewSection === 'categories' && (
             <div className="pt-16 sm:pt-20">
@@ -594,7 +594,7 @@ export default function App() {
         />
 
         {/* Milestone 2C: Mobile Liquid Glass Bottom Navigation Dock */}
-        <MobileBottomNav />
+        <MobileBottomNav isHidden={introActive || isCustomizerOpen} />
       </div>
     </div>
     </CartProvider>
