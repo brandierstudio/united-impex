@@ -536,17 +536,43 @@ export const ECOMMERCE_PRODUCTS: EcommerceProduct[] = [
 export const getProductBySlug = (slug: string): EcommerceProduct | undefined => {
   const normalized = slug.toLowerCase().trim();
   const aliasMap: Record<string, string> = {
-    'boxes': 'packaging-boxes',
-    'bags': 'paper-bags',
-    'diaries': 'corporate-diaries',
+    // Packaging Boxes & Cartons
+    'boxes': 'boxes',
+    'box': 'boxes',
+    'carton': 'boxes',
+    'cartons': 'boxes',
+    'packaging-boxes': 'boxes',
+    'custom-boxes': 'boxes',
+    'prod-custom-boxes': 'boxes',
+
+    // Corporate Diaries & Notebooks
+    'diaries': 'diaries',
+    'diary': 'diaries',
+    'corporate-diaries': 'diaries',
+    'diaries-notebooks': 'diaries',
+    'notebooks': 'diaries',
+    'prod-diaries': 'diaries',
+
+    // Coffee Cups
+    'coffee-cups': 'coffee-cups',
     'cups': 'coffee-cups',
     'cup': 'coffee-cups',
-    'box': 'packaging-boxes',
+    'prod-coffee-cups': 'coffee-cups',
+
+    // Paper Bags
+    'paper-bags': 'paper-bags',
+    'bags': 'paper-bags',
     'bag': 'paper-bags',
-    'diary': 'corporate-diaries'
+    'prod-paper-bags': 'paper-bags'
   };
   const resolvedSlug = aliasMap[normalized] || normalized;
-  return ECOMMERCE_PRODUCTS.find(p => p.slug === resolvedSlug || p.id === resolvedSlug);
+  return ECOMMERCE_PRODUCTS.find(p => 
+    p.slug === resolvedSlug || 
+    p.id === resolvedSlug || 
+    p.slug === normalized || 
+    p.id === normalized ||
+    p.category === normalized
+  );
 };
 
 export const getProductsByCategory = (category: ProductCategory): EcommerceProduct[] => {

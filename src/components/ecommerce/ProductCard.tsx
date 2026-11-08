@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'wouter';
+import { useLocation } from 'wouter';
 import { Eye, Heart, ShoppingBag, Plus, Check } from 'lucide-react';
 import { type EcommerceProduct } from '../../data/ecommerceProductsData';
 import { useCart } from '../../context/CartContext';
@@ -15,6 +15,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onQuickView,
   onOpenCustomizer: _onOpenCustomizer
 }) => {
+  const [, setLocation] = useLocation();
   const { addToCart, isInWishlist, toggleWishlist } = useCart();
   const [isHovered, setIsHovered] = useState(false);
   const [mobileShowLifestyle, setMobileShowLifestyle] = useState(false);
@@ -23,6 +24,22 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const isFavorited = isInWishlist(product.id);
   const activeVariant = product.variations[0];
   const unitPrice = product.startingPricePKR * (activeVariant?.priceModifier || 1.0);
+
+  const handleCardClick = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.closest('button')) {
+      return;
+    }
+    setLocation(`/products/${product.slug}`);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      const target = e.target as HTMLElement;
+      if (target.closest('button')) return;
+      setLocation(`/products/${product.slug}`);
+    }
+  };
 
   const handleQuickAdd = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -50,7 +67,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <div 
-      className="group relative bg-white rounded-2xl sm:rounded-3xl border border-zinc-200/90 shadow-2xs hover:shadow-xl hover:border-[#EB1767]/40 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+      role="link"
+      tabIndex={0}
+      onClick={handleCardClick}
+      onKeyDown={handleKeyDown}
+      aria-label={`View details for ${product.title}`}
+      className="group relative bg-white rounded-2xl sm:rounded-3xl border border-zinc-200/90 shadow-2xs hover:shadow-xl hover:border-[#EB1767]/40 transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -134,12 +156,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           {mobileShowLifestyle ? 'Studio' : 'In-Use'}
         </button>
 
-        {/* Quick View Trigger Mask on Desktop */}
-        <div 
-          onClick={() => onQuickView(product)}
-          className="absolute inset-0 cursor-pointer z-10 hidden sm:block"
-          aria-hidden="true"
-        />
+        {/* Card surface click navigates to product details */}
       </div>
 
       {/* =====================================================================
@@ -149,12 +166,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         
         {/* Title & Short Spec */}
         <div className="space-y-1">
-          <Link
-            href={`/products/${product.slug}`}
-            className="block text-xs sm:text-base font-bold font-['Outfit',sans-serif] text-zinc-900 hover:text-[#EB1767] transition-colors line-clamp-2 leading-snug"
+          <span
+            className="block text-xs sm:text-base font-bold font-['Outfit',sans-serif] text-zinc-900 group-hover:text-[#EB1767] transition-colors line-clamp-2 leading-snug cursor-pointer"
           >
             {product.title}
-          </Link>
+          </span>
 
           <p className="text-[11px] sm:text-xs text-zinc-500 line-clamp-1">
             {product.subhead}
