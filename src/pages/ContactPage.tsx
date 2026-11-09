@@ -9,10 +9,28 @@ import { OfficeLocations } from '../components/home/OfficeLocations';
 import { GlassVideoShowcase } from '../components/ui/GlassVideoShowcase';
 import contactPosterWebp from '../assets/page-media/contact-media-poster.webp';
 import contactPosterPng from '../assets/page-media/contact-media-poster.png';
+import { SEOHead } from '../components/seo/SEOHead';
 
 export const ContactPage: React.FC = () => {
   return (
     <div className="w-full bg-white selection:bg-[#EB1767] selection:text-white pt-6 sm:pt-10 pb-20">
+      <SEOHead
+        title="Contact & Office Locations in Karachi and Multan | United Impex"
+        description="Direct commercial coordination for custom packaging, sample proofing, and volume quotes. Coordinated offices in Karachi and Multan. Official WhatsApp: +92 371 4799755."
+        canonicalPath="/contact"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "ContactPage",
+          "name": "Contact United Impex",
+          "description": "Direct communication desk and coordinated offices in Karachi and Multan.",
+          "mainEntity": {
+            "@type": "LocalBusiness",
+            "name": "United Impex",
+            "telephone": "+923714799755",
+            "url": "https://united-impex-app.vercel.app/contact"
+          }
+        }}
+      />
       
       {/* =========================================================================
           1. BREADCRUMB & EDITORIAL HEADER

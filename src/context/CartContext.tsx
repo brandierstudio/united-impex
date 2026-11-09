@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { CONTACT_INFO } from '../data/businessData';
 import { ECOMMERCE_PRODUCTS } from '../data/ecommerceProductsData';
+import { trackAddToCart } from '../utils/analytics';
 
 export interface CartItem {
   id: string; // unique composite key: `${productId}-${variantId}`
@@ -26,6 +27,7 @@ interface CartContextType {
   removeFromCart: (id: string) => void;
   clearCart: () => void;
   totalItemsCount: number;
+  totalUnitsCount: number;
   subtotalPKR: number;
   formatWhatsAppQuoteUrl: (customerName?: string, customerNote?: string) => string;
   
@@ -127,6 +129,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // 3. Cart Actions
   const addToCart = (newItem: Omit<CartItem, 'id'>) => {
+    trackAddToCart(newItem.productId, newItem.title, newItem.quantity, newItem.unitPricePKR);
     const compositeId = `${newItem.productId}-${newItem.variantId}`;
     setItems((prevItems) => {
       const existingIndex = prevItems.findIndex((item) => item.id === compositeId);
@@ -164,7 +167,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   // 4. Calculations
-  const totalItemsCount = items.reduce((sum, item) => sum + item.quantity, 0);
+  const totalItemsCount = items.length;
+  const totalUnitsCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
   const subtotalPKR = items.reduce(
     (sum, item) => sum + item.unitPricePKR * item.quantity,
@@ -224,6 +228,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         removeFromCart,
         clearCart,
         totalItemsCount,
+        totalUnitsCount,
         subtotalPKR,
         formatWhatsAppQuoteUrl,
         wishlistIds,

@@ -632,33 +632,52 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCustomizer }) => {
                     className="w-full h-full object-cover object-center pointer-events-none select-none"
                   />
 
-                  {/* Left Readable Studio Shadow Gradient Overlay */}
-                  <div 
-                    className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/35 to-transparent pointer-events-none" 
-                    aria-hidden="true" 
-                  />
+                  {/* Studio Shadow Gradient Overlay for Slides 1 & 2 (Slide 0 already has native studio lighting) */}
+                  {slide.id !== 'boxes' && (
+                    <div 
+                      className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/35 to-transparent pointer-events-none" 
+                      aria-hidden="true" 
+                    />
+                  )}
 
-                  {/* Real Selectable HTML Headline and Functional CTA Button */}
-                  <div className="absolute top-8 sm:top-10 left-5 sm:left-7 z-20 max-w-[270px] sm:max-w-[320px] pointer-events-auto">
-                    <h1 className="text-2xl sm:text-3xl font-extrabold text-white font-['Outfit',sans-serif] tracking-tight leading-[1.15] drop-shadow-md">
-                      {slide.headlineLine1} <br />
-                      {slide.headlineLine2} <br />
-                      {slide.headlineHighlight && (
-                        <span className="text-[#EB1767] drop-shadow-sm">{slide.headlineHighlight}</span>
-                      )}
-                    </h1>
-
-                    <div className="mt-4">
+                  {/* Slide 0 (Owner-Approved Reference): Interactive Hotspot + Accessible Heading */}
+                  {slide.id === 'boxes' ? (
+                    <>
+                      <h1 className="sr-only">
+                        Custom Packaging for Your Brand
+                      </h1>
                       <Link
                         href={slide.ctaRoute}
-                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white text-zinc-900 font-bold text-xs sm:text-sm shadow-lg hover:bg-zinc-100 active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
-                        aria-label={`${slide.ctaLabel} — ${slide.name}`}
+                        style={{ left: '7.6%', top: '51.1%', width: '37.2%', height: '9.1%' }}
+                        className="absolute z-20 rounded-full cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] opacity-0"
+                        aria-label="Explore Collection — Custom Packaging Boxes"
                       >
-                        <span>{slide.id === "boxes" ? "Explore Collection" : slide.ctaLabel}</span>
-                        <ArrowRight className="w-4 h-4 text-zinc-900" />
+                        <span className="sr-only">Explore Collection</span>
                       </Link>
+                    </>
+                  ) : (
+                    /* Slides 1 & 2: Real Selectable HTML Headline and Functional CTA Button */
+                    <div className="absolute top-8 sm:top-10 left-5 sm:left-7 z-20 max-w-[270px] sm:max-w-[320px] pointer-events-auto">
+                      <h2 className="text-2xl sm:text-3xl font-extrabold text-white font-['Outfit',sans-serif] tracking-tight leading-[1.15] drop-shadow-md">
+                        {slide.headlineLine1} <br />
+                        {slide.headlineLine2} <br />
+                        {slide.headlineHighlight && (
+                          <span className="text-[#EB1767] drop-shadow-sm">{slide.headlineHighlight}</span>
+                        )}
+                      </h2>
+
+                      <div className="mt-4">
+                        <Link
+                          href={slide.ctaRoute}
+                          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white text-zinc-900 font-bold text-xs sm:text-sm shadow-lg hover:bg-zinc-100 active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767]"
+                          aria-label={`${slide.ctaLabel} — ${slide.name}`}
+                        >
+                          <span>{slide.ctaLabel}</span>
+                          <ArrowRight className="w-4 h-4 text-zinc-900" />
+                        </Link>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               ))}
             </div>

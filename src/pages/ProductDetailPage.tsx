@@ -26,6 +26,7 @@ import {
 } from '../data/ecommerceProductsData';
 import { useCart } from '../context/CartContext';
 import { ProductCustomizerModal, type CustomizerCategory } from '../components/customizer/ProductCustomizerModal';
+import { SEOHead } from '../components/seo/SEOHead';
 
 interface ProductDetailPageProps {
   onOpenCustomizer?: (category?: CustomizerCategory) => void;
@@ -108,6 +109,33 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenCust
 
   return (
     <div className="w-full bg-white selection:bg-[#EB1767] selection:text-white pt-6 sm:pt-10 pb-24">
+      <SEOHead
+        title={`${product.title} — Custom Packaging | United Impex`}
+        description={product.subhead || product.description.slice(0, 150)}
+        canonicalPath={`/products/${product.slug}`}
+        ogType="product"
+        ogImage={product.primaryImage.startsWith('http') ? product.primaryImage : `https://united-impex-app.vercel.app${product.primaryImage}`}
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Product",
+          "name": product.title,
+          "description": product.description,
+          "image": product.primaryImage.startsWith('http') ? product.primaryImage : `https://united-impex-app.vercel.app${product.primaryImage}`,
+          "sku": product.id,
+          "brand": {
+            "@type": "Brand",
+            "name": "United Impex"
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": `https://united-impex-app.vercel.app/products/${product.slug}`,
+            "priceCurrency": "PKR",
+            "price": product.startingPricePKR,
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition"
+          }
+        }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* =========================================================================

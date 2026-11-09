@@ -10,6 +10,7 @@ import { Link } from 'wouter';
 import { QuotationWizard } from '../components/home/QuotationWizard';
 import { CONTACT_INFO } from '../data/businessData';
 import type { CustomizerCategory } from '../components/customizer/ProductCustomizerModal';
+import { SEOHead } from '../components/seo/SEOHead';
 
 export const QuotePage: React.FC = () => {
   // Support pre-selecting category via query string (?product=cups|boxes|bags|diaries)
@@ -24,6 +25,24 @@ export const QuotePage: React.FC = () => {
 
   return (
     <div className="w-full bg-white selection:bg-[#EB1767] selection:text-white pt-6 sm:pt-10 pb-20">
+      <SEOHead
+        title="Request a Custom Packaging Quote | United Impex"
+        description="Calculate instant packaging estimates for cups, boxes, bags, and diaries. Select quantities, cardstock substrates, and luxury finishes with instant WhatsApp quote handoff."
+        canonicalPath="/quote"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Custom Packaging Quotation Service",
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "United Impex",
+            "telephone": "+923714799755",
+            "url": "https://united-impex-app.vercel.app/"
+          },
+          "serviceType": "B2B Custom Packaging Manufacturing",
+          "areaServed": "Pakistan"
+        }}
+      />
       
       {/* =========================================================================
           1. HEADER & VALUE PROPOSITION

@@ -279,18 +279,22 @@ export const Navbar: React.FC<NavbarProps> = ({ introActive = false }) => {
           {/* Mobile Left: Official Vector Logo */}
           <Link 
             href="/"
-            className="flex items-center min-h-[44px] px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] rounded-lg transition-transform hover:opacity-90 active:scale-95"
+            className="flex items-center gap-2 min-h-[44px] px-1 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] rounded-lg transition-transform hover:opacity-90 active:scale-95"
             aria-label={`${COMPANY_IDENTITY.name} — Home`}
           >
             <img 
               src={logoSvg} 
               alt={COMPANY_IDENTITY.name} 
-              className="h-7 w-auto object-contain"
+              className="h-6 w-auto object-contain"
             />
+            <div className="flex flex-col leading-[1.05]">
+              <span className="font-extrabold text-[12px] tracking-wider text-zinc-900 font-['Outfit',sans-serif]">UNITED</span>
+              <span className="font-bold text-[10px] tracking-widest text-zinc-600 font-['Outfit',sans-serif]">IMPEX</span>
+            </div>
           </Link>
 
           {/* Mobile Right: 3-Control Translucent Circular Action Buttons */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 shrink-0">
             {/* Call Action */}
             <a
               href={CONTACT_INFO.phoneTel}

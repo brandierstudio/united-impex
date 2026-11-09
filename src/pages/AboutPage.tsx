@@ -22,12 +22,29 @@ import areebAshrafImg from '../assets/about/areeb-ashraf.webp';
 import { GlassVideoShowcase } from '../components/ui/GlassVideoShowcase';
 import aboutPosterWebp from '../assets/page-media/about-media-poster.webp';
 import aboutPosterPng from '../assets/page-media/about-media-poster.png';
+import { SEOHead } from '../components/seo/SEOHead';
 
 export const AboutPage: React.FC = () => {
   const [activeCardSide, setActiveCardSide] = useState<'front' | 'back'>('front');
 
   return (
     <div className="w-full bg-white selection:bg-[#EB1767] selection:text-white pt-6 sm:pt-10 pb-20">
+      <SEOHead
+        title="About Our Printing Heritage & Leadership | United Impex"
+        description="Learn about United Impex's commercial printing craftsmanship, our Karachi and Multan facilities, and leadership by CEO Areeb Ashraf."
+        canonicalPath="/about"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "name": "About United Impex",
+          "description": "Company background, printing heritage, and executive leadership.",
+          "publisher": {
+            "@type": "Organization",
+            "name": "United Impex",
+            "url": "https://united-impex-app.vercel.app/"
+          }
+        }}
+      />
       
       {/* =========================================================================
           1. EDITORIAL PAGE HERO

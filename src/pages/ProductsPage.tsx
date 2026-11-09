@@ -13,6 +13,7 @@ import { ECOMMERCE_PRODUCTS, type EcommerceProduct } from '../data/ecommerceProd
 import { ProductCard } from '../components/ecommerce/ProductCard';
 import { QuickViewModal } from '../components/ecommerce/QuickViewModal';
 import { ProductCustomizerModal, type CustomizerCategory } from '../components/customizer/ProductCustomizerModal';
+import { SEOHead } from '../components/seo/SEOHead';
 
 interface ProductsPageProps {
   onOpenCustomizer?: (category?: CustomizerCategory) => void;
@@ -151,6 +152,18 @@ export const ProductsPage: React.FC<ProductsPageProps> = () => {
 
   return (
     <div className="w-full bg-white selection:bg-[#EB1767] selection:text-white pt-6 sm:pt-10 pb-20">
+      <SEOHead
+        title="Custom Packaging & Commercial Printing Catalog | United Impex"
+        description="Explore our full collection of custom paper cups, rigid boxes, corrugated cartons, shopping bags, and diaries manufactured with precision."
+        canonicalPath="/products"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "name": "United Impex Packaging Catalog",
+          "description": "Commercial custom packaging and printing collections.",
+          "url": "https://united-impex-app.vercel.app/products"
+        }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* =========================================================================

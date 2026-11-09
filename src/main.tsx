@@ -2,6 +2,10 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
+import { initAnalytics } from './utils/analytics.ts'
+
+// Initialize analytics (GA4) if measurement ID is present in environment
+initAnalytics()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -96,14 +96,14 @@ export const ProductCategories: React.FC<ProductCategoriesProps> = ({ onOpenCust
             href="/products/coffee-cups"
             className="group flex flex-col items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] rounded-2xl"
           >
-            <div className="w-full aspect-square rounded-[18px] sm:rounded-[22px] overflow-hidden bg-[#F5EFEA] border border-zinc-200/60 p-1.5 sm:p-2 shadow-2xs group-hover:scale-[1.03] active:scale-95 transition-all">
+            <div className="w-full aspect-square rounded-[18px] sm:rounded-[22px] overflow-hidden bg-[#F5EFEA] shadow-2xs group-hover:scale-[1.03] active:scale-95 transition-all">
               <img
                 src="/mobile-ref/cat-coffee-cups.webp"
                 alt="Custom Coffee Cups"
-                width={240}
-                height={240}
+                width={300}
+                height={300}
                 loading="lazy"
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
               />
             </div>
             <span className="mt-1.5 text-[11px] sm:text-xs font-semibold text-zinc-800 text-center tracking-tight leading-tight group-hover:text-[#EB1767] transition-colors">
@@ -116,14 +116,14 @@ export const ProductCategories: React.FC<ProductCategoriesProps> = ({ onOpenCust
             href="/products/boxes"
             className="group flex flex-col items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] rounded-2xl"
           >
-            <div className="w-full aspect-square rounded-[18px] sm:rounded-[22px] overflow-hidden bg-[#F5EFEA] border border-zinc-200/60 p-1.5 sm:p-2 shadow-2xs group-hover:scale-[1.03] active:scale-95 transition-all">
+            <div className="w-full aspect-square rounded-[18px] sm:rounded-[22px] overflow-hidden bg-[#F5EFEA] shadow-2xs group-hover:scale-[1.03] active:scale-95 transition-all">
               <img
                 src="/mobile-ref/cat-cartons.webp"
                 alt="Custom Packaging Cartons"
-                width={240}
-                height={240}
+                width={300}
+                height={300}
                 loading="lazy"
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
               />
             </div>
             <span className="mt-1.5 text-[11px] sm:text-xs font-semibold text-zinc-800 text-center tracking-tight leading-tight group-hover:text-[#EB1767] transition-colors">
@@ -136,14 +136,14 @@ export const ProductCategories: React.FC<ProductCategoriesProps> = ({ onOpenCust
             href="/products/paper-bags"
             className="group flex flex-col items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] rounded-2xl"
           >
-            <div className="w-full aspect-square rounded-[18px] sm:rounded-[22px] overflow-hidden bg-[#F5EFEA] border border-zinc-200/60 p-1.5 sm:p-2 shadow-2xs group-hover:scale-[1.03] active:scale-95 transition-all">
+            <div className="w-full aspect-square rounded-[18px] sm:rounded-[22px] overflow-hidden bg-[#F5EFEA] shadow-2xs group-hover:scale-[1.03] active:scale-95 transition-all">
               <img
                 src="/mobile-ref/cat-paper-bags.webp"
                 alt="Custom Paper Bags"
-                width={240}
-                height={240}
+                width={300}
+                height={300}
                 loading="lazy"
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
               />
             </div>
             <span className="mt-1.5 text-[11px] sm:text-xs font-semibold text-zinc-800 text-center tracking-tight leading-tight group-hover:text-[#EB1767] transition-colors">
@@ -156,14 +156,14 @@ export const ProductCategories: React.FC<ProductCategoriesProps> = ({ onOpenCust
             href="/products/diaries"
             className="group flex flex-col items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] rounded-2xl"
           >
-            <div className="w-full aspect-square rounded-[18px] sm:rounded-[22px] overflow-hidden bg-[#F5EFEA] border border-zinc-200/60 p-1.5 sm:p-2 shadow-2xs group-hover:scale-[1.03] active:scale-95 transition-all">
+            <div className="w-full aspect-square rounded-[18px] sm:rounded-[22px] overflow-hidden bg-[#F5EFEA] shadow-2xs group-hover:scale-[1.03] active:scale-95 transition-all">
               <img
                 src="/mobile-ref/cat-diaries.webp"
                 alt="Custom Corporate Diaries"
-                width={240}
-                height={240}
+                width={300}
+                height={300}
                 loading="lazy"
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
               />
             </div>
             <span className="mt-1.5 text-[11px] sm:text-xs font-semibold text-zinc-800 text-center tracking-tight leading-tight group-hover:text-[#EB1767] transition-colors">
@@ -178,12 +178,12 @@ export const ProductCategories: React.FC<ProductCategoriesProps> = ({ onOpenCust
           className="group relative block mt-3.5 rounded-[22px] sm:rounded-[26px] overflow-hidden shadow-sm border border-zinc-200/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EB1767] active:scale-[0.99] transition-all"
           aria-label="Explore Premium Custom Boxes Collection"
         >
-          <div className="relative aspect-[524/152] w-full overflow-hidden bg-[#453632]">
+          <div className="relative aspect-[524/142] w-full overflow-hidden bg-[#453632]">
             <img
               src="/mobile-ref/feature-banner-boxes.webp"
               alt="Premium Custom Boxes — Luxury rigid cartons with debossed metallic branding"
               width={1048}
-              height={304}
+              height={284}
               loading="lazy"
               className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500"
             />

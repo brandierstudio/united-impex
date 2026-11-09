@@ -14,6 +14,7 @@ import {
 import { WhatsAppIcon } from '../components/icons/WhatsAppIcon';
 import { useCart, type CartItem } from '../context/CartContext';
 import { ECOMMERCE_PRODUCTS } from '../data/ecommerceProductsData';
+import { SEOHead } from '../components/seo/SEOHead';
 
 export const CartPage: React.FC = () => {
   const { 
@@ -21,7 +22,7 @@ export const CartPage: React.FC = () => {
     updateQuantity, 
     removeFromCart, 
     clearCart, 
-    totalItemsCount, 
+    totalUnitsCount,
     subtotalPKR,
     formatWhatsAppQuoteUrl 
   } = useCart();
@@ -36,6 +37,11 @@ export const CartPage: React.FC = () => {
 
   return (
     <div className="w-full bg-white selection:bg-[#EB1767] selection:text-white pt-6 sm:pt-10 pb-24">
+      <SEOHead
+        title="Your Packaging Inquiry Cart | United Impex"
+        description="Review custom packaging items and specifications, configure order volumes, and forward your quote inquiry directly to our WhatsApp coordination team."
+        canonicalPath="/cart"
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* =========================================================================
@@ -230,7 +236,7 @@ export const CartPage: React.FC = () => {
                 {/* Subtotal & Notes */}
                 <div className="space-y-3 text-xs sm:text-sm">
                   <div className="flex items-center justify-between">
-                    <span className="text-zinc-600">Subtotal ({totalItemsCount.toLocaleString()} units):</span>
+                    <span className="text-zinc-600">Subtotal ({totalUnitsCount.toLocaleString()} units):</span>
                     <span className="font-bold text-zinc-900 font-mono">
                       PKR {subtotalPKR.toLocaleString()}
                     </span>

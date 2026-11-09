@@ -39,6 +39,8 @@ import { CartPage } from './pages/CartPage';
 import { QuotePage } from './pages/QuotePage';
 import { ContactPage } from './pages/ContactPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { SEOHead } from './components/seo/SEOHead';
+import { trackPageView } from './utils/analytics';
 import { CartProvider } from './context/CartContext';
 import { useScrollReveal } from './hooks/useScrollReveal';
 import logoSvg from './assets/logo/logo.svg';
@@ -103,10 +105,11 @@ export default function App() {
     ? new URLSearchParams(window.location.search).get('section') 
     : null;
 
-  // Scroll to top on route change
+  // Scroll to top on route change & track page view
   useEffect(() => {
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0);
+      trackPageView(location);
     }
   }, [location]);
 
@@ -227,6 +230,11 @@ export default function App() {
           {/* 1. Primary Homepage View: Full Sequence */}
           {location === '/' && !isDebug && !previewSection && (
             <>
+              <SEOHead
+                title="United Impex | Quality Offset Printing & Custom Packaging"
+                description="Premier quality offset printer and bespoke packaging manufacturer. Coordinated from offices in Karachi and Multan, Pakistan."
+                canonicalPath="/"
+              />
               {/* Milestone 12: Continuous Cinematic Hero-to-Table Cup Flight */}
               <CinematicScrollCup />
               <Hero 
