@@ -51,7 +51,11 @@ export const AnnouncementBar: React.FC<AnnouncementBarProps> = ({ className = ''
     },
   ];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(() => {
+    if (typeof window === 'undefined') return 0;
+    const param = new URLSearchParams(window.location.search).get('announcement_msg');
+    return param === '1' ? 1 : 0;
+  });
   const [isPaused, setIsPaused] = useState(false);
   const [isReducedMotion, setIsReducedMotion] = useState(false);
 
@@ -65,6 +69,9 @@ export const AnnouncementBar: React.FC<AnnouncementBarProps> = ({ className = ''
 
   useEffect(() => {
     if (isPaused || isReducedMotion) return;
+    if (typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('announcement_msg')) {
+      return; // deterministic freeze during testing
+    }
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % messages.length);
     }, 4500);
@@ -78,11 +85,11 @@ export const AnnouncementBar: React.FC<AnnouncementBarProps> = ({ className = ''
       onMouseLeave={() => setIsPaused(false)}
       onFocus={() => setIsPaused(true)}
       onBlur={() => setIsPaused(false)}
-      className={`hidden md:block w-full bg-[#121216] text-white border-b border-zinc-800/40 relative z-30 transition-colors select-none ${className}`}
+      className={`w-full bg-[#121216] text-white border-b border-zinc-800/60 relative z-30 transition-colors select-none ${className}`}
     >
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-2 min-h-[36px] flex items-center justify-center">
+      <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-1.5 sm:py-2 min-h-[34px] sm:min-h-[36px] flex items-center justify-center">
         <div 
-          className={`text-center text-xs sm:text-[13px] leading-snug font-medium tracking-wide text-zinc-100 ${
+          className={`text-center text-[11px] sm:text-xs md:text-[13px] leading-tight sm:leading-snug font-medium tracking-tight sm:tracking-normal text-zinc-100 ${
             isReducedMotion ? '' : 'animate-announcement-roll'
           }`}
           key={currentIndex}
